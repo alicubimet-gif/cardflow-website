@@ -32,9 +32,12 @@ export default function Pricing() {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("/server/auth/session");
-        const data = await res.json();
-        setIsAuthenticated(!!data?.isAuthenticated);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'}/api/auth/me/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
+          },
+        });
+        setIsAuthenticated(res.ok);
       } catch (err) {
         setIsAuthenticated(false);
       }

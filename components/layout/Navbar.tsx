@@ -33,23 +33,15 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  // Check auth state on mount using session checking endpoint and me API
+  // Check auth state on mount using me API directly
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/server/auth/session");
-        const data = await res.json();
-        
-        if (data && data.isAuthenticated) {
+        const userRes = await apiClient.get("/api/auth/me/");
+        const userData = userRes.data || userRes;
+        if (userData && userData.email) {
           setAuthenticated(true);
-          const userRes = await fetch("/server/auth/me");
-          if (userRes.ok) {
-            const userData = await userRes.json();
-            setUser(userData.data || userData);
-          } else {
-            setAuthenticated(false);
-            setUser(null);
-          }
+          setUser(userData.data || userData);
         } else {
           setAuthenticated(false);
           setUser(null);
@@ -59,7 +51,6 @@ export default function Navbar() {
         setUser(null);
       }
     };
-
     checkAuth();
   }, [pathname]);
 
