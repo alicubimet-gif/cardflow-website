@@ -19,32 +19,32 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Zamzarc | ID Card Management & Printing SaaS",
-    template: "%s | Zamzarc",
+    default: "Z Cards | ID Card Management & Printing SaaS",
+    template: "%s | Z Cards",
   },
   description:
-    "Design, manage databases, and print high-quality physical ID cards in bulk with Zamzarc. Custom workflows for colleges, schools, corporate houses, and print shops.",
+    "Design, manage databases, and print high-quality physical ID cards in bulk with Zamirzac. Custom workflows for colleges, schools, corporate houses, and print shops.",
   keywords: [
-    "Zamzarc",
+    "Zamirzac",
     "ID Card Designer",
     "Bulk Card Printing",
     "SaaS ID Card",
     "ID Management System",
     "Card Printing Agency Software",
   ],
-  authors: [{ name: "Zamzarc Team" }],
+  authors: [{ name: "Z Cards Team" }],
   openGraph: {
-    title: "Zamzarc | ID Card Management & Printing SaaS",
+    title: "Z Cards | ID Card Management & Printing SaaS",
     description:
-      "Design, manage databases, and print high-quality physical ID cards in bulk with Zamzarc.",
-    siteName: "Zamzarc",
+      "Design, manage databases, and print high-quality physical ID cards in bulk with Z Cards.",
+    siteName: "Z Cards",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zamzarc | ID Card Management & Printing SaaS",
+    title: "Z Cards | ID Card Management & Printing SaaS",
     description:
-      "Design, manage databases, and print high-quality physical ID cards in bulk with Zamzarc.",
+      "Design, manage databases, and print high-quality physical ID cards in bulk with Z Cards.",
   },
 };
 

@@ -110,8 +110,8 @@ function RegisterForm() {
                 An account with this email already exists.
               </h1>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-semibold leading-relaxed max-w-md mx-auto">
-                You already have a Zamzarc account.<br />
-                Please login through Zamzarc Studio.
+                You already have a Z Cards account.<br />
+                Please login through Z Cards Studio.
               </p>
             </div>
 
@@ -139,14 +139,14 @@ function RegisterForm() {
           <>
             <div className="text-center space-y-3">
               <div className="flex justify-center mb-6">
-                <img src="/branding/logo-dark.png" alt="Zamzarc Logo" className="h-8 object-contain block dark:hidden" />
-                <img src="/branding/logo-light.png" alt="Zamzarc Logo" className="h-8 object-contain hidden dark:block" />
+                <img src="/branding/logo-dark.png" alt="Z Cards Logo" className="h-8 object-contain block dark:hidden" />
+                <img src="/branding/logo-light.png" alt="Z Cards Logo" className="h-8 object-contain hidden dark:block" />
               </div>
               <h1 className="text-[32px] font-bold text-slate-900 dark:text-slate-100 font-heading leading-tight">
                 Create an Account
               </h1>
               <p className="text-base text-slate-500 dark:text-slate-400 font-medium">
-                Join Zamzarc and start designing your ID cards.
+                Join Z Cards and start designing your ID cards.
               </p>
             </div>
 

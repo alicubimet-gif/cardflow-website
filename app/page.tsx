@@ -293,7 +293,7 @@ export default function Home() {
     {
       number: "01",
       title: "Design ID Templates",
-      desc: "Use Zamzarc Studio to create identity templates with standard placeholders for names, photos, QR codes, and barcodes.",
+      desc: "Use Z Cards Studio to create identity templates with standard placeholders for names, photos, QR codes, and barcodes.",
     },
     {
       number: "02",
@@ -319,7 +319,7 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "Zamzarc reduced our school's registration-to-card pipeline from three weeks to two days. Students uploaded their own photos, and we verified everything in minutes.",
+      quote: "Z Cards reduced our school's registration-to-card pipeline from three weeks to two days. Students uploaded their own photos, and we verified everything in minutes.",
       author: "Sarah Jenkins",
       role: "IT Director at Oakridge Academy",
       rating: 5
@@ -340,14 +340,14 @@ export default function Home() {
 
   const faqs = [
     {
-      question: "Which physical card printers are compatible with Zamzarc?",
+      question: "Which physical card printers are compatible with Z Cards?",
       answer:
-        "Zamzarc is compatible with all major physical ID card printers, including Evolis, Zebra, Fargo, Magicard, and Nisca. We support direct printing or exporting high-resolution, print-ready PDF batches matching standard CR80 credit-card dimensions (85.60 × 53.98 mm).",
+        "Z Cards is compatible with all major physical ID card printers, including Evolis, Zebra, Fargo, Magicard, and Nisca. We support direct printing or exporting high-resolution, print-ready PDF batches matching standard CR80 credit-card dimensions (85.60 × 53.98 mm).",
     },
     {
       question: "Can I import employee lists directly from HR systems?",
       answer:
-        "Yes! Zamzarc supports importing member lists from Excel sheet files, CSV tables, and Google Sheets. Additionally, you can connect your existing database to our REST APIs to automate data ingestion.",
+        "Yes! Z Cards supports importing member lists from Excel sheet files, CSV tables, and Google Sheets. Additionally, you can connect your existing database to our REST APIs to automate data ingestion.",
     },
     {
       question: "How does the registration and payment flow work?",
@@ -418,7 +418,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed font-medium">
-              Zamzarc helps printing agencies, schools, offices, and organizations manage ID card data, approvals, previews, printing, and credit-based production in one place.
+              Z Cards helps printing agencies, schools, offices, and organizations manage ID card data, approvals, previews, printing, and credit-based production in one place.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
@@ -615,7 +615,7 @@ export default function Home() {
             Tailored Workflows for Every Organization
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
-            Whether you operate a high-volume printing factory or manage member cards for a school or corporation, Zamzarc simplifies execution.
+            Whether you operate a high-volume printing factory or manage member cards for a school or corporation, Z Cards simplifies execution.
           </p>
         </motion.div>
 
@@ -773,7 +773,7 @@ export default function Home() {
               Engineered for Speed & Quality
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
-              Zamzarc streamlines card production pipelines by automating repetitive data formatting tasks.
+              Z Cards streamlines card production pipelines by automating repetitive data formatting tasks.
             </p>
           </motion.div>
 
@@ -817,7 +817,7 @@ export default function Home() {
             Design to Print in Three Easy Steps
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
-            Zamzarc simplifies ID card production workflows, eliminating static template copy-paste errors completely.
+            Z Cards simplifies ID card production workflows, eliminating static template copy-paste errors completely.
           </p>
         </motion.div>
 
@@ -1018,7 +1018,7 @@ export default function Home() {
               Loved by Teams Worldwide
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
-              Hear from administrative leads, card makers, and printing agencies using Zamzarc.
+              Hear from administrative leads, card makers, and printing agencies using Z Cards.
             </p>
           </motion.div>
 
@@ -1066,7 +1066,7 @@ export default function Home() {
             <HelpCircle className="w-7 h-7 text-blue-600 dark:text-blue-400" /> Frequently Asked Questions
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-            Everything you need to know about the Zamzarc SaaS platform and printing engine.
+            Everything you need to know about the Z Cards SaaS platform and printing engine.
           </p>
         </motion.div>
 
@@ -1110,7 +1110,7 @@ export default function Home() {
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">Contact Details</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                Reach out to us directly or fill out the form to request a custom configuration, bulk prices, or a guided tour of Zamzarc Studio.
+                Reach out to us directly or fill out the form to request a custom configuration, bulk prices, or a guided tour of Z Cards Studio.
               </p>
             </div>
 
@@ -1226,7 +1226,7 @@ export default function Home() {
                   <span>Enquiry Sent Successfully!</span>
                 </div>
                 <p className="text-xs text-emerald-750 dark:text-emerald-400 leading-relaxed font-medium">
-                  Thank you for reaching out. We have logged your request in Zamzarc Control under our active support tickets. An agent will contact you shortly.
+                  Thank you for reaching out. We have logged your request in Z Cards Control under our active support tickets. An agent will contact you shortly.
                 </p>
               </motion.div>
             ) : (
