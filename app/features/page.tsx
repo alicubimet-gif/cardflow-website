@@ -106,7 +106,7 @@ export default function Features() {
               {/* Header organization bar */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-2">
                 <span className="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">
-                  Z CARDS DEV STUDIO
+                  Z Cards DEV STUDIO
                 </span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
               </div>

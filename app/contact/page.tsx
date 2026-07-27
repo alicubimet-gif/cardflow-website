@@ -69,7 +69,7 @@ export default function Contact() {
       {/* HEADER SECTION */}
       <section className="text-center max-w-2xl mx-auto space-y-4">
         <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-5xl transition-colors duration-300 ease-in-out">
-          Get in touch with Z Cards
+          Get in touch with Zamirzac
         </h1>
         <p className="text-base text-zinc-550 dark:text-gray-300 transition-colors duration-300 ease-in-out">
           Need technical support or have a billing query? Our support engineers are standing by.

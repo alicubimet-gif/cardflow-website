@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     template: "%s | Z Cards",
   },
   description:
-    "Design, manage databases, and print high-quality physical ID cards in bulk with Z Cards. Custom workflows for colleges, schools, corporate houses, and print shops.",
+    "Design, manage databases, and print high-quality physical ID cards in bulk with Zamirzac. Custom workflows for colleges, schools, corporate houses, and print shops.",
   keywords: [
-    "Z Cards",
+    "Zamirzac",
     "ID Card Designer",
     "Bulk Card Printing",
     "SaaS ID Card",
