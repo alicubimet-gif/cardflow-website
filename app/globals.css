@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Switch Tailwind v4 dark-mode from media-query to class strategy.
+   BrandingProvider toggles .dark on <html>, so all dark: utilities
+   must respond to that class — not the OS prefers-color-scheme query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 :root {
   --background: #fafbfe;
   --foreground: #0b0f19;

@@ -1,4 +1,4 @@
-import { apiClient, apiRequest } from "@/lib/apiClient";
+import { apiRequest } from "@/lib/apiClient";
 
 /**
  * New magic-link subscriber registration.
@@ -19,8 +19,6 @@ export const registerSubscriber = async (data: {
   });
 };
 
-
-
 export const verifyOtp = async (data: { email: string; otp: string }): Promise<any> => {
   return apiRequest("/server/auth/verify-otp", {
     method: "POST",
@@ -35,58 +33,33 @@ export const resendOtp = async (data: { email: string }): Promise<any> => {
   });
 };
 
+/**
+ * Shared auth service for password reset, complete-profile, and demo requests.
+ * These are public flows that do not require an authenticated session.
+ */
 export const authService = {
-  register: async (data: any) => {
-    const response = await apiClient.post("/auth/register", data);
-    return response.data;
-  },
-  verifyOtp: async (data: { email: string; otp_code: string; purpose?: string }) => {
-    const response = await apiClient.post("/auth/verify-otp", data);
-    return response.data;
-  },
-  resendOtp: async (data: { email: string; purpose?: string }) => {
-    const response = await apiClient.post("/auth/resend-otp", data);
-    return response.data;
-  },
   forgotPassword: async (data: any) => {
-    const response = await apiClient.post("/auth/forgot-password", data);
-    return response.data;
+    return apiRequest("/server/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
   },
   resetPassword: async (data: any) => {
-    const response = await apiClient.post("/auth/reset-password", data);
-    return response.data;
+    return apiRequest("/server/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
   },
   completeProfile: async (data: any) => {
-    const response = await apiClient.post("/auth/complete-profile", data);
-    return response.data;
-  },
-  submitContact: async (data: any) => {
-    const response = await apiClient.post("/public/contact", data);
-    return response.data;
+    return apiRequest("/server/auth/complete-profile", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
   },
   submitEnquiry: async (data: any) => {
-    const response = await apiClient.post("/public/demo-request", data);
-    return response.data;
+    return apiRequest("/server/demo-request", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
   },
-  login: async (data: any) => {
-    const response = await apiClient.post('/auth/login', data);
-    // Tokens are set as HttpOnly cookies by the proxy — no localStorage storage
-    return response.data;
-  },
-  googleLogin: async (token: string) => {
-    const response = await apiClient.post('/auth/google', { credential: token });
-    // Tokens are set as HttpOnly cookies by the proxy — no localStorage storage
-    return response.data;
-  },
-  logout: async () => {
-    if (typeof window !== 'undefined') {
-      try {
-        await apiClient.post('/auth/logout/');
-      } catch (err) {}
-      // Clear any stale data from localStorage
-      localStorage.removeItem('user');
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-    }
-  }
 };

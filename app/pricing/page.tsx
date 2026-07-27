@@ -7,7 +7,6 @@ import { useToast } from "@/components/ui/Toast";
 import LoadingState from "@/components/loading-state";
 import ApiError from "@/components/api-error";
 import { getPublicPricing } from "@/services/pricingService";
-import { STUDIO_URL } from "@/lib/config";
 
 interface CreditPackage {
   id: string;
@@ -27,23 +26,6 @@ export default function Pricing() {
   const [loading, setLoading] = useState(true);
   const [checkoutLoadingId, setCheckoutLoadingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'}/api/auth/me/`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
-          },
-        });
-        setIsAuthenticated(res.ok);
-      } catch (err) {
-        setIsAuthenticated(false);
-      }
-    };
-    checkSession();
-  }, []);
 
   const fetchPackages = async () => {
     setLoading(true);
@@ -69,18 +51,10 @@ export default function Pricing() {
     fetchPackages();
   }, []);
 
-  const handleCheckout = async (pkgId: string) => {
+  const handleCheckout = (pkgId: string) => {
     setCheckoutLoadingId(pkgId);
-
-    const studioUrl = STUDIO_URL;
-
-    if (isAuthenticated) {
-      // Already authenticated — go directly to Studio credit packages
-      window.location.href = `${studioUrl}/credits/packages?package_id=${pkgId}`;
-      return;
-    }
-
-    // Not authenticated — redirect to register with context preserved
+    // Public website — always redirect to register with context preserved.
+    // Once registered the user is directed to Studio where they can purchase credits.
     showToast("Please create an account to purchase credits.", "info");
     router.push(`/register?next=buy&package_id=${pkgId}`);
     setCheckoutLoadingId(null);
@@ -108,10 +82,10 @@ export default function Pricing() {
       {/* GET packages API Error state */}
       {!loading && error && (
         <div className="py-8">
-          <ApiError 
-            title="Unable to load pricing" 
-            message={error} 
-            onRetry={fetchPackages} 
+          <ApiError
+            title="Unable to load pricing"
+            message={error}
+            onRetry={fetchPackages}
           />
         </div>
       )}
@@ -133,7 +107,7 @@ export default function Pricing() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch pt-4">
           {packages.map((pkg) => {
             const currencySymbol = pkg.currency?.toLowerCase() === 'usd' ? '$' : '₹';
-            
+
             return (
               <div
                 key={pkg.id}

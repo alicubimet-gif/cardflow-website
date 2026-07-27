@@ -1,39 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { STUDIO_URL, GOOGLE_MAPS_URL } from "@/lib/config";
 import { Heart, Mail, CheckCircle, Phone, MapPin, ArrowUp } from "lucide-react";
-import { useBranding } from "@/components/branding-provider";
+import { ThemeLogo } from "@/components/theme-logo";
 
 export default function Footer() {
-  const { brandSettings, theme } = useBranding();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [logoError, setLogoError] = useState(false);
-
-  // Reset logo error flag when theme changes to try loading the theme-appropriate logo
-  useEffect(() => {
-    setLogoError(false);
-  }, [theme]);
-
-  // Determine logo source based on current theme and branding settings
-  const getLogoSrc = () => {
-    if (logoError) {
-      return theme === "dark" ? "/branding/logo-light.png" : "/branding/logo-light.png";
-    }
-
-    if (theme === "dark") {
-      return brandSettings.logo_light_url && brandSettings.logo_light_url !== "/logo.png"
-        ? brandSettings.logo_light_url
-        : "/branding/logo-light.png";
-    } else {
-      return brandSettings.logo_dark_url && brandSettings.logo_dark_url !== "/logo.png"
-        ? brandSettings.logo_dark_url
-        : "/branding/logo-light.png";
-    }
-  };
-
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
@@ -58,19 +33,7 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col justify-between">
             <div>
               <Link href="/" className="flex items-center gap-3 mb-4 group inline-flex" aria-label="Zamzarc Home">
-                <img 
-                  src={getLogoSrc()} 
-                  alt="Zamzarc Logo"
-                  width="130"
-                  height="32"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-                  onError={() => setLogoError(true)}
-                />
-                <span className="font-sans font-extrabold text-lg tracking-tight text-foreground dark:text-white font-heading">
-                  <span className="text-primary">Zamzarc</span>
-                </span>
+                <ThemeLogo width={130} height={32} className="transition-transform duration-300 group-hover:scale-[1.03]" />
               </Link>
               <p className="text-sm text-slate-500 dark:text-zinc-400 max-w-sm mb-6 leading-relaxed">
                 Zamzarc is a premium modern ID card management and printing platform designed for colleges, schools, corporate branches, and professional printing agencies.
