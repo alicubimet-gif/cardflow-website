@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Zamzarc App',
-    short_name: 'Zamzarc',
+    name: 'Zamirzac App',
+    short_name: 'Zamirzac',
     description: 'The ultimate ID card production and management platform.',
     start_url: '/',
     display: 'standalone',

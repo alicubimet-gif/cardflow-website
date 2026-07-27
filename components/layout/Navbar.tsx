@@ -35,7 +35,13 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo area */}
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+<<<<<<< HEAD
               <ThemeLogo width={120} height={32} priority className="transition-transform group-hover:scale-[1.02]" />
+=======
+              <span className="font-sans font-extrabold text-lg tracking-tight font-heading text-[#2563EB]">
+                Zamirzac
+              </span>
+>>>>>>> 9f620f4d47fd86a96bc1be7a40c7debe38f2ca50
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -117,8 +123,15 @@ export default function Navbar() {
               className="fixed right-0 top-0 bottom-0 z-50 w-72 bg-white dark:bg-slate-900 shadow-2xl flex flex-col md:hidden"
             >
               {/* Drawer Header */}
+<<<<<<< HEAD
               <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-slate-700">
                 <ThemeLogo width={110} height={28} />
+=======
+              <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+                <span className="font-sans font-extrabold text-lg tracking-tight text-[#2563EB]">
+                  Zamirzac
+                </span>
+>>>>>>> 9f620f4d47fd86a96bc1be7a40c7debe38f2ca50
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors cursor-pointer"
