@@ -88,7 +88,7 @@ function CompleteProfileForm() {
             Complete Your Profile
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-            Just a few more details to set up your Z Cards Studio workspace.
+            Just a few more details to set up your Zamzarc Studio workspace.
           </p>
         </div>
 

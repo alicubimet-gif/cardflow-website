@@ -109,7 +109,7 @@ export default function Navbar() {
             {/* Logo area */}
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <span className="font-sans font-extrabold text-lg tracking-tight font-heading text-[#2563EB]">
-                Z Cards
+                Zamzarc
               </span>
             </Link>
 
@@ -263,7 +263,7 @@ export default function Navbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
                 <span className="font-sans font-extrabold text-lg tracking-tight text-[#2563EB]">
-                  Z Cards
+                  Zamzarc
                 </span>
                 <button
                   onClick={() => setIsOpen(false)}

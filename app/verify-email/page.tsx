@@ -66,7 +66,7 @@ function VerifyEmailForm() {
                 Email Verified Successfully!
               </h1>
               <p className="text-base text-slate-600 dark:text-slate-350 font-medium leading-relaxed max-w-md mx-auto">
-                We are redirecting you to Z Cards Studio to finish verification securely.
+                We are redirecting you to Zamzarc Studio to finish verification securely.
               </p>
             </div>
             {studioRedirectUrl && (

@@ -49,7 +49,7 @@ export default function Features() {
     {
       icon: Grid,
       title: "Variable Data Fields",
-      desc: "Link placeholders to client sheets. If a cell is empty for a cardholder, Z Cards auto-compacts layout lines dynamically.",
+      desc: "Link placeholders to client sheets. If a cell is empty for a cardholder, Zamzarc auto-compacts layout lines dynamically.",
     },
     {
       icon: Database,
@@ -79,14 +79,14 @@ export default function Features() {
           SaaS Editor for Precision Printing
         </h1>
         <p className="text-lg text-muted leading-relaxed">
-          Skip complex desktop tools. Z Cards brings full vector layout editors, custom barcode renders, and automated data mapping directly into the cloud.
+          Skip complex desktop tools. Zamzarc brings full vector layout editors, custom barcode renders, and automated data mapping directly into the cloud.
         </p>
       </section>
 
       {/* SIMULATED LAYOUT CANVAS */}
       <section className="p-8 rounded-2xl border border-card-border bg-card-bg/30">
         <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-          <h2 className="text-2xl font-bold text-foreground">Z Cards Studio Simulator</h2>
+          <h2 className="text-2xl font-bold text-foreground">Zamzarc Studio Simulator</h2>
           <p className="text-xs text-muted leading-relaxed">
             Drag the positioning sliders or toggle layers below to simulate our cloud-based card layout compiler.
           </p>
@@ -106,7 +106,7 @@ export default function Features() {
               {/* Header organization bar */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-2">
                 <span className="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase">
-                  Z CARDS DEV STUDIO
+                  ZAMZARC DEV STUDIO
                 </span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
               </div>
@@ -367,7 +367,7 @@ export default function Features() {
             Print Engine Calibrated for Thermal and Dye-Sub Printers
           </h2>
           <p className="text-sm text-muted leading-relaxed">
-            Z Cards does not just generate simple images. We produce high-resolution vector PDF blocks that render beautifully at 300 DPI, preventing blurry text, scan issues on barcode readers, or pixelated photos.
+            Zamzarc does not just generate simple images. We produce high-resolution vector PDF blocks that render beautifully at 300 DPI, preventing blurry text, scan issues on barcode readers, or pixelated photos.
           </p>
           <ul className="space-y-3 text-sm text-muted">
             <li className="flex items-center gap-2">

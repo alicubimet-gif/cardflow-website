@@ -23,9 +23,9 @@ export interface BrandSettings {
 }
 
 const defaultBrandSettings: BrandSettings = {
-  platform_name: "Z Cards",
+  platform_name: "Zamzarc",
   tagline: "Smart ID Card Management & Printing Platform",
-  company_name: "Z Cards",
+  company_name: "Zamzarc",
   primary_color: "#2563EB",
   secondary_color: "#0F172A",
   accent_color: "#14B8A6",

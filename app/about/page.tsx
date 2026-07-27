@@ -8,7 +8,7 @@ export default function About() {
     {
       year: "2024",
       title: "Founding & Prototypes",
-      desc: "Z Cards was founded to eliminate manually compiling static graphic layers in printing workshops, designing a basic online vector composer.",
+      desc: "Zamzarc was founded to eliminate manually compiling static graphic layers in printing workshops, designing a basic online vector composer.",
     },
     {
       year: "2025",
@@ -50,7 +50,7 @@ export default function About() {
     {
       name: "Sophia Martinez",
       role: "Lead Software Architect",
-      bio: "Pioneered Z Cards's canvas variable data compilers. Ex-Vercel layout engine contributor.",
+      bio: "Pioneered Zamzarc's canvas variable data compilers. Ex-Vercel layout engine contributor.",
       img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
     },
     {
@@ -116,7 +116,7 @@ export default function About() {
         <div className="text-center max-w-xl mx-auto space-y-2">
           <h2 className="text-2xl font-bold text-foreground">Meet the Print-Tech Innovators</h2>
           <p className="text-xs text-muted">
-            The engineering, product, and support minds behind Z Cards's layout compilers.
+            The engineering, product, and support minds behind Zamzarc's layout compilers.
           </p>
         </div>
 

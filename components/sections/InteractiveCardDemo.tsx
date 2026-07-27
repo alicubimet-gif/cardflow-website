@@ -103,7 +103,7 @@ export default function InteractiveCardDemo() {
                   <div className="flex items-center gap-1.5">
                     <CreditCard className="w-5 h-5" style={{ color: style.logoColor }} />
                     <span className="font-sans font-extrabold text-[10px] uppercase tracking-widest opacity-95">
-                      {template === "corporate" ? "Zamirzac Inc" : template === "academic" ? "Zamirzac Academy" : "Z Cards Premium"}
+                      {template === "corporate" ? "Zamirzac Inc" : template === "academic" ? "Zamirzac Academy" : "Zamzarc Premium"}
                     </span>
                   </div>
                   <ShieldCheck className="w-5 h-5 opacity-80" style={{ color: style.accent }} />
@@ -253,7 +253,7 @@ export default function InteractiveCardDemo() {
             Customize in Real-Time
           </h2>
           <p className="mt-3 text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-            See how the Z Cards printing engine handles dynamic variables. Modify the name, role, ID, and select different styles to verify the vector front and back templates immediately.
+            See how the Zamzarc printing engine handles dynamic variables. Modify the name, role, ID, and select different styles to verify the vector front and back templates immediately.
           </p>
         </div>
 
