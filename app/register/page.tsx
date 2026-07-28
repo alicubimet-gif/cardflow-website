@@ -185,14 +185,9 @@ function RegisterForm() {
                 Account Already Exists
               </h1>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-semibold leading-relaxed max-w-md mx-auto">
-<<<<<<< HEAD
                 You already have a Zamzarc account.
                 <br />
                 Please sign in through Zamzarc Studio.
-=======
-                You already have a Z Cards account.<br />
-                Please login through Z Cards Studio.
->>>>>>> 9f620f4d47fd86a96bc1be7a40c7debe38f2ca50
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 max-w-sm mx-auto">
@@ -211,27 +206,10 @@ function RegisterForm() {
               </Button>
             </div>
           </div>
-<<<<<<< HEAD
         </div>
       </div>
     );
   }
-=======
-        ) : (
-          <>
-            <div className="text-center space-y-3">
-              <div className="flex justify-center mb-6">
-                <img src="/branding/logo-dark.png" alt="Z Cards Logo" className="h-8 object-contain block dark:hidden" />
-                <img src="/branding/logo-light.png" alt="Z Cards Logo" className="h-8 object-contain hidden dark:block" />
-              </div>
-              <h1 className="text-[32px] font-bold text-slate-900 dark:text-slate-100 font-heading leading-tight">
-                Create an Account
-              </h1>
-              <p className="text-base text-slate-500 dark:text-slate-400 font-medium">
-                Join Z Cards and start designing your ID cards.
-              </p>
-            </div>
->>>>>>> 9f620f4d47fd86a96bc1be7a40c7debe38f2ca50
 
   // ── Registration form ──────────────────────────────────────────────────────
   return (
