@@ -26,7 +26,7 @@ function VerifyEmailForm() {
       setStatus("success");
       const studioUrl = STUDIO_URL;
       const cleanStudioUrl = studioUrl.endsWith("/") ? studioUrl.slice(0, -1) : studioUrl;
-      const redirectUrl = `${cleanStudioUrl}/auth/verify?token=${encodeURIComponent(token)}`;
+      const redirectUrl = `${cleanStudioUrl}/verify-email?token=${encodeURIComponent(token)}`;
       setStudioRedirectUrl(redirectUrl);
 
       setTimeout(() => {

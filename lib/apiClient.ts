@@ -80,12 +80,16 @@ export async function apiRequest<T = any>(
   error.data = data;
 
   // Surface field-level DRF validation errors for direct setError() calls
-  if (response.status === 400 && data && typeof data === "object") {
+  if (
+    (response.status === 400 || response.status === 409 || response.status === 422) &&
+    data &&
+    typeof data === "object"
+  ) {
     // If the proxy wraps errors as { errors: {...} }, unwrap them
     const fieldErrors = data.errors ?? data;
     const fields: Record<string, string> = {};
     for (const [key, value] of Object.entries(fieldErrors)) {
-      if (["success", "message", "detail", "code", "errors"].includes(key)) continue;
+      if (["success", "message", "detail", "code", "errors", "type", "title", "status"].includes(key)) continue;
       const msg = Array.isArray(value) ? String(value[0]) : String(value);
       fields[key] = msg;
     }

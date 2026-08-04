@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const studioUrl = process.env.NEXT_PUBLIC_STUDIO_URL || "";
+function studioBaseUrl(): string {
+  return (
+    process.env.NEXT_PUBLIC_STUDIO_URL ||
+    process.env.NEXT_PUBLIC_STUDIO_APP_URL ||
+    process.env.STUDIO_APP_URL ||
+    ""
+  ).replace(/\/$/, "");
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const studioUrl = studioBaseUrl();
   if (!studioUrl) return NextResponse.next();
 
   // Redirect legacy /credits and /payment paths to Studio
@@ -15,7 +23,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/credits/packages", studioUrl));
   }
 
-  // Redirect /login to Studio login (the website has no login page of its own)
+  // Login lives in Studio — website never authenticates users itself
   if (pathname.startsWith("/login")) {
     return NextResponse.redirect(new URL("/login" + request.nextUrl.search, studioUrl));
   }

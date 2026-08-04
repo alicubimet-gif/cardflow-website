@@ -32,25 +32,15 @@ export default function Footer() {
           {/* Brand Info & Newsletter */}
           <div className="lg:col-span-2 flex flex-col justify-between">
             <div>
-<<<<<<< HEAD
-              <Link href="/" className="flex items-center gap-3 mb-4 group inline-flex" aria-label="Zamzarc Home">
-                <ThemeLogo width={130} height={32} className="transition-transform duration-300 group-hover:scale-[1.03]" />
-=======
               <Link href="/" className="flex items-center gap-3 mb-4 group inline-flex" aria-label="Z Cards Home">
-                <img 
-                  src={getLogoSrc()} 
-                  alt="Z Cards Logo"
-                  width="130"
-                  height="32"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-                  onError={() => setLogoError(true)}
+                <ThemeLogo
+                  width={130}
+                  height={32}
+                  className="h-8 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
                 />
                 <span className="font-sans font-extrabold text-lg tracking-tight text-foreground dark:text-white font-heading">
                   <span className="text-primary">Z Cards</span>
                 </span>
->>>>>>> 9f620f4d47fd86a96bc1be7a40c7debe38f2ca50
               </Link>
               <p className="text-sm text-slate-500 dark:text-zinc-400 max-w-sm mb-6 leading-relaxed">
                 Z Cards is a premium modern ID card management and printing platform designed for colleges, schools, corporate branches, and professional printing agencies.

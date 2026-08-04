@@ -1,11 +1,10 @@
 import { apiRequest } from "@/lib/apiClient";
 
 /**
- * New magic-link subscriber registration.
- * Accepts { name, email, phone, company }.
- * Backend creates user + company, generates a secure one-time token,
- * and emails a "Verify & Open Studio" link.
- * No password is ever created by or sent to the client.
+ * Public studio self-registration (ZCards `/api/public/auth/register/`).
+ * Accepts website form fields { name, email, phone, company }.
+ * The server proxy maps them to { full_name, email, mobile, studio_name }.
+ * Backend emails a magic-link verification — no password is set by the client.
  */
 export const registerSubscriber = async (data: {
   name: string;
@@ -34,8 +33,8 @@ export const resendOtp = async (data: { email: string }): Promise<any> => {
 };
 
 /**
- * Shared auth service for password reset, complete-profile, and demo requests.
- * These are public flows that do not require an authenticated session.
+ * Shared auth helpers for password reset / complete-profile / demo.
+ * Login itself is not handled here — the website redirects to Studio.
  */
 export const authService = {
   forgotPassword: async (data: any) => {

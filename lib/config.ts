@@ -1,7 +1,18 @@
 export const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '/server';
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || '';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || APP_URL || 'http://localhost:3000';
-export const STUDIO_URL = process.env.NEXT_PUBLIC_STUDIO_URL || 'http://localhost:3001';
+
+/**
+ * Studio Hub / Studio App URL.
+ * Prefer NEXT_PUBLIC_STUDIO_URL; also accept STUDIO_APP_URL / NEXT_PUBLIC_STUDIO_APP_URL
+ * (names used in backend / deployment docs).
+ */
+export const STUDIO_URL =
+  process.env.NEXT_PUBLIC_STUDIO_URL ||
+  process.env.NEXT_PUBLIC_STUDIO_APP_URL ||
+  process.env.STUDIO_APP_URL ||
+  'http://localhost:3001';
+
 export const GOOGLE_MAPS_URL = process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || 'https://maps.google.com/?q=Zamirzac+Solutions,+Calicut,+Kerala,+India';
 
 export function normalizeBackendUrl(value?: string | null): string {
@@ -26,4 +37,11 @@ export function getBackendApiUrl(path = ''): string {
   }
   const cleanPath = path.replace(/^\/+/, '');
   return `${backendUrl}/api/${cleanPath}`;
+}
+
+/** Absolute Studio login URL (website never posts credentials itself). */
+export function getStudioLoginUrl(search = ''): string {
+  const base = STUDIO_URL.replace(/\/$/, '');
+  const qs = search.startsWith('?') ? search : search ? `?${search}` : '';
+  return `${base}/login${qs}`;
 }
