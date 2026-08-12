@@ -7,11 +7,10 @@ import { getBackendApiUrl } from "@/lib/config";
  */
 export async function GET(
   _request: Request,
-  context: { params: Promise<{ id: string }> | { id: string } },
+  context: { params: Promise<{ id: string }> },
 ) {
   try {
-    const params = await Promise.resolve(context.params);
-    const id = params.id;
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json(
         { success: false, message: "Product id is required." },

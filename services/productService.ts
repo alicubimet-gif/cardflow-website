@@ -50,9 +50,11 @@ export async function getPublicProduct(id: string): Promise<PublicProduct> {
   return res.data;
 }
 
-export function productImageUrl(product: PublicProduct): string | null {
+export function productImageUrl(
+  product: Pick<PublicProduct, "images"> | null | undefined,
+): string | null {
   const backend = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
-  for (const img of product.images || []) {
+  for (const img of product?.images || []) {
     if (typeof img === "string" && img) return img;
     if (img && typeof img === "object") {
       const id = typeof img.id === "string" ? img.id : null;

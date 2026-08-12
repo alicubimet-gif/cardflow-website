@@ -65,7 +65,7 @@ export default function ProductDetailPage() {
   const outOfStock = product?.stock_status === "out";
   const belowMoq = product ? quantity < (product.moq || 1) : false;
   const specs = product ? productSpecs(product.specs) : [];
-  const cover = gallery[activeImage] || productImageUrl(product || ({ images: [] } as PublicProduct));
+  const cover = gallery[activeImage] || productImageUrl(product);
 
   const orderOnWhatsApp = () => {
     if (!product || outOfStock) return;
