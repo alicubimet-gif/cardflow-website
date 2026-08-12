@@ -120,14 +120,14 @@ function EnquiryContent() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Input
               label="Contact Person Name"
-              placeholder="Alex Rivers"
+              placeholder="Riyas Ahmed"
               error={errors.name?.message}
               {...register("name")}
             />
             <Input
               label="Work Email Address"
               type="email"
-              placeholder="alex@printingagency.com"
+              placeholder="riyas@malabarprint.in"
               error={errors.email?.message}
               {...register("email")}
             />
@@ -150,7 +150,7 @@ function EnquiryContent() {
             />
             <Input
               label="Company Name"
-              placeholder="Rivers Print Hub Inc."
+              placeholder="Malabar Print Hub"
               error={errors.company?.message}
               {...register("company")}
             />

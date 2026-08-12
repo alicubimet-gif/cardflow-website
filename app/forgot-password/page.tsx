@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Mail, ArrowLeft, KeyRound } from "lucide-react";
 import { authService as apiService } from "@/services/authService";
 import { getErrorMessage } from "@/lib/error-handler";
@@ -10,8 +9,6 @@ import Input from "@/components/ui/Input";
 import { STUDIO_URL } from "@/lib/config";
 
 export default function ForgotPassword() {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -26,32 +23,29 @@ export default function ForgotPassword() {
 
     if (!email.trim()) {
       setEmailError("Email is required.");
-      const el = document.querySelector('input[type="email"]') as HTMLInputElement;
-      if (el) el.focus();
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError("Please enter a valid email address.");
-      const el = document.querySelector('input[type="email"]') as HTMLInputElement;
-      if (el) el.focus();
       return;
     }
 
     setIsLoading(true);
 
     try {
-      await apiService.forgotPassword({ email });
-      setSuccess("Verification code sent! Loading password reset screen...");
-      setTimeout(() => {
-        router.push(`/reset-password?email=${encodeURIComponent(email)}`);
-      }, 1500);
-    } catch (err: any) {
+      await apiService.forgotPassword({ email: email.trim() });
+      setSuccess(
+        "If an account exists for that email, a password reset link has been sent. Open the link to choose a new password.",
+      );
+    } catch (err: unknown) {
       const errMsg = getErrorMessage(err);
-      if (errMsg.toLowerCase().includes("email") || errMsg.toLowerCase().includes("account") || errMsg.toLowerCase().includes("user")) {
+      if (
+        errMsg.toLowerCase().includes("email") ||
+        errMsg.toLowerCase().includes("account") ||
+        errMsg.toLowerCase().includes("user")
+      ) {
         setEmailError(errMsg);
-        const el = document.querySelector('input[type="email"]') as HTMLInputElement;
-        if (el) el.focus();
       } else {
         setError(errMsg);
       }
@@ -71,7 +65,7 @@ export default function ForgotPassword() {
           </div>
           <h2 className="text-xl font-bold font-heading text-foreground mt-2">Password Recovery</h2>
           <p className="text-xs text-muted">
-            Enter your registered email address to receive a recovery OTP
+            Enter your registered email and we will send a secure reset link.
           </p>
         </div>
 
@@ -86,30 +80,35 @@ export default function ForgotPassword() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          <div className="relative">
-            <Mail className="absolute left-3.5 top-[36px] w-4 h-4 text-muted animate-pulse" />
-            <Input
-              label="Email Address"
-              type="email"
-              placeholder="you@company.com"
-              className="pl-10"
-              value={email}
-              error={emailError || undefined}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (emailError) setEmailError(null);
-              }}
-            />
-          </div>
+        {!success ? (
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <div className="relative">
+              <Mail className="absolute left-3.5 top-[36px] w-4 h-4 text-muted animate-pulse" />
+              <Input
+                label="Email Address"
+                type="email"
+                placeholder="you@company.com"
+                className="pl-10"
+                value={email}
+                error={emailError || undefined}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError(null);
+                }}
+              />
+            </div>
 
-          <Button type="submit" className="w-full mt-4 py-3" isLoading={isLoading}>
-            Send Verification Code
-          </Button>
-        </form>
+            <Button type="submit" className="w-full mt-4 py-3" isLoading={isLoading}>
+              Send reset link
+            </Button>
+          </form>
+        ) : null}
 
         <div className="text-center mt-6 pt-4 border-t border-card-border/60">
-          <a href={STUDIO_URL || "/login"} className="inline-flex items-center gap-2 text-xs font-semibold text-muted hover:text-foreground">
+          <a
+            href={STUDIO_URL ? `${STUDIO_URL.replace(/\/$/, "")}/login` : "/login"}
+            className="inline-flex items-center gap-2 text-xs font-semibold text-muted hover:text-foreground"
+          >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Studio
           </a>
         </div>

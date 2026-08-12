@@ -39,15 +39,24 @@ const TEMPLATES: Record<TemplateId, TemplateStyle> = {
 };
 
 const AVATARS = [
-  { name: "Executive", url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=250" },
-  { name: "Tech", url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250" },
-  { name: "Academic", url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=250" },
+  {
+    name: "Staff",
+    url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=250",
+  },
+  {
+    name: "Faculty",
+    url: "https://images.unsplash.com/photo-1615109398623-88346a601842?auto=format&fit=crop&q=80&w=250",
+  },
+  {
+    name: "Student",
+    url: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=250",
+  },
 ];
 
 export default function InteractiveCardDemo() {
   const [template, setTemplate] = useState<TemplateId>("corporate");
-  const [name, setName] = useState("Jane Doe");
-  const [title, setTitle] = useState("Chief Operations Officer");
+  const [name, setName] = useState("Ananya Nair");
+  const [title, setTitle] = useState("Admin Officer");
   const [idNum, setIdNum] = useState("Z-CF-892410");
   const [avatar, setAvatar] = useState(AVATARS[0].url);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -211,7 +220,7 @@ export default function InteractiveCardDemo() {
                       style={{ fontFamily: "'Brush Script MT', cursive, sans-serif" }} 
                       className="text-2xl text-white/90 border-b border-white/20 px-8 pb-1 tracking-wide"
                     >
-                      {name || "Jane Doe"}
+                      {name || "Ananya Nair"}
                     </span>
                     <span className="text-[7px] uppercase tracking-widest text-white/40 block mt-1 font-bold">
                       Authorized Signature

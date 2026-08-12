@@ -14,7 +14,6 @@ import {
   FileCheck2,
   Users,
   CheckCircle,
-  HelpCircle,
   Sparkles,
   ArrowRight,
   Mail,
@@ -24,7 +23,6 @@ import {
   Send,
   Loader2,
   Clock,
-  Star,
   Zap,
   Lock,
   Eye,
@@ -35,9 +33,12 @@ import { getPublicPricing } from "@/services/pricingService";
 import { requestDemo } from "@/services/demoService";
 import { useToast } from "@/components/ui/Toast";
 import InteractiveCardDemo from "@/components/sections/InteractiveCardDemo";
+import ProductsShowcase from "@/components/sections/ProductsShowcase";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import FaqsSection from "@/components/sections/FaqsSection";
+import TeamSection from "@/components/sections/TeamSection";
 import Button from "@/components/ui/Button";
 import { PhoneInput } from "@/components/ui/PhoneInput";
-import Accordion from "@/components/ui/Accordion";
 import { GOOGLE_MAPS_URL } from "@/lib/config";
 
 interface CreditPackage {
@@ -317,50 +318,6 @@ export default function Home() {
     { icon: Gift, title: "Credit-Based System", desc: "No recurring fees. Top-up printing points when you actually require them." },
   ];
 
-  const testimonials = [
-    {
-      quote: "Z Cards reduced our school's registration-to-card pipeline from three weeks to two days. Students uploaded their own photos, and we verified everything in minutes.",
-      author: "Sarah Jenkins",
-      role: "IT Director at Oakridge Academy",
-      rating: 5
-    },
-    {
-      quote: "For our print shop, this platform is a game changer. Clients upload their own rosters, and we export print-ready batch layouts. No layout errors, zero waste.",
-      author: "David Chen",
-      role: "Owner at PrintMax Solutions",
-      rating: 5
-    },
-    {
-      quote: "We managed employee cards for 5 office locations. The approval workflow ensured all security designs and barcodes matched our guidelines before sending to printing.",
-      author: "Marcus Thorne",
-      role: "HR Lead at Velo Financial",
-      rating: 5
-    }
-  ];
-
-  const faqs = [
-    {
-      question: "Which physical card printers are compatible with Z Cards?",
-      answer:
-        "Z Cards is compatible with all major physical ID card printers, including Evolis, Zebra, Fargo, Magicard, and Nisca. We support direct printing or exporting high-resolution, print-ready PDF batches matching standard CR80 credit-card dimensions (85.60 × 53.98 mm).",
-    },
-    {
-      question: "Can I import employee lists directly from HR systems?",
-      answer:
-        "Yes! Z Cards supports importing member lists from Excel sheet files, CSV tables, and Google Sheets. Additionally, you can connect your existing database to our REST APIs to automate data ingestion.",
-    },
-    {
-      question: "How does the registration and payment flow work?",
-      answer:
-        "Select a credit package that fits your business. Once registered, complete payment using Stripe's secure checkout. Your customized studio workspace is instantly initialized, allowing you to design and print immediately.",
-    },
-    {
-      question: "Is there a limit on how many cards I can design and print?",
-      answer:
-        "Designing is unlimited on all accounts. Printing cards consumes 'printing credits'. Each plan comes with a generous monthly credit quota, and you can purchase extra credit packages as needed from your dashboard.",
-    },
-  ];
-
   return (
     <div className="space-y-20 md:space-y-28 lg:space-y-32 pb-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
       
@@ -418,21 +375,18 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed font-medium">
-              Z Cards helps printing agencies, schools, offices, and organizations manage ID card data, approvals, previews, printing, and credit-based production in one place.
+              From photo capture to print-ready cards — Z Cards keeps every organisation, branch, and print job in sync, so you deliver accurate IDs faster with less back-and-forth.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
               <Link href="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto flex items-center justify-center gap-1.5 hover:scale-102 hover:shadow-lg hover:shadow-blue-500/20 active:scale-98 transition-all duration-200">
-                  Create Account <ChevronRight className="w-4 h-4" />
+                  Sign up free <ChevronRight className="w-4 h-4" />
                 </Button>
               </Link>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto hover:bg-slate-50 dark:hover:bg-slate-900 hover:scale-102 transition-all" onClick={() => {
-                const el = document.getElementById("demo-request");
-                el?.scrollIntoView({ behavior: "smooth" });
-              }}>
-                Book Demo
-              </Button>
+              <p className="text-sm font-semibold text-slate-600 dark:text-slate-300 sm:pl-1">
+                Get <span className="text-blue-600 dark:text-blue-400">25 credits free</span> when you create your studio.
+              </p>
             </div>
 
             {/* Micro Stats (Upgraded to Count-up Counters) */}
@@ -509,13 +463,13 @@ export default function Home() {
                   <div className="flex flex-col items-center">
                     <div className="w-24 h-24 rounded-full p-1 border-2 border-blue-500/50 mb-3 bg-slate-900 overflow-hidden shadow-inner transform hover:scale-105 transition-transform duration-300">
                       <img 
-                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=250" 
+                        src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=250" 
                         alt="Avatar Preview" 
                         className="w-full h-full object-cover rounded-full"
                       />
                     </div>
-                    <h3 className="font-bold text-base text-center text-white">Kathryn McKinney</h3>
-                    <p className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mt-1">Security Manager</p>
+                    <h3 className="font-bold text-base text-center text-white">Ananya Nair</h3>
+                    <p className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mt-1">Admin Officer</p>
                   </div>
 
                   {/* Footer details */}
@@ -601,6 +555,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* 2b. PRODUCT STORE PREVIEW */}
+      <ProductsShowcase limit={4} />
 
       {/* 3. TAILORED BENEFITS SECTION & STATISTICS COUNTERS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1004,81 +961,14 @@ export default function Home() {
         )}
       </section>
 
-      {/* 8. TESTIMONIALS SECTION WITH SLIDE REVEAL */}
-      <section className="bg-slate-50 dark:bg-slate-900/30 py-20 border-y border-slate-100 dark:border-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUpVariant}
-            className="text-center max-w-3xl mx-auto mb-16 space-y-4"
-          >
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl font-heading">
-              Loved by Teams Worldwide
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
-              Hear from administrative leads, card makers, and printing agencies using Z Cards.
-            </p>
-          </motion.div>
+      {/* 8. TESTIMONIALS */}
+      <TestimonialsSection />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {testimonials.map((t, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.15, ease: "easeOut" }}
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between hover-glow"
-              >
-                <div>
-                  <div className="flex items-center gap-1 mb-4 text-amber-500">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-350 italic leading-relaxed font-medium">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">{t.author}</h4>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 font-semibold mt-0.5">{t.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 8b. TEAM */}
+      <TeamSection />
 
-      {/* 9. FAQS WITH ACCORDION ANIMATION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUpVariant}
-          className="text-center mb-12 space-y-3"
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-2 font-heading">
-            <HelpCircle className="w-7 h-7 text-blue-600 dark:text-blue-400" /> Frequently Asked Questions
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-            Everything you need to know about the Z Cards SaaS platform and printing engine.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <Accordion items={faqs} />
-        </motion.div>
-      </section>
+      {/* 9. FAQS */}
+      <FaqsSection />
 
       {/* 10. REDESIGNED HOME PAGE CONTACT & MAP SECTION */}
       <section id="demo-request" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -1150,7 +1040,7 @@ export default function Home() {
                 <div className="space-y-1 text-left">
                   <h4 className="font-extrabold text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">Phone Support</h4>
                   <p className="text-xs text-slate-750 dark:text-slate-300 font-bold mt-1">
-                    <a href="tel:+18005552273" className="hover:underline">+1 (800) 555-CARD</a>
+                    <a href="tel:+918891633035" className="hover:underline">+91 88916 33035</a>
                   </p>
                   <p className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">Toll-free Support</p>
                 </div>
@@ -1237,7 +1127,7 @@ export default function Home() {
                     <input
                       id="enquiry-name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Anitha Krishnan"
                       value={enquiryName}
                       onChange={(e) => {
                         setEnquiryName(e.target.value);
@@ -1270,7 +1160,7 @@ export default function Home() {
                     <input
                       id="enquiry-email"
                       type="email"
-                      placeholder="john@company.com"
+                      placeholder="anitha@farookschool.edu.in"
                       value={enquiryEmail}
                       onChange={(e) => {
                         setEnquiryEmail(e.target.value);

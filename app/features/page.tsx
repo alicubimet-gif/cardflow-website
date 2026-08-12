@@ -143,7 +143,7 @@ export default function Features() {
                       <div className="relative w-20 h-20 rounded-full border-2 border-primary/20 bg-zinc-100 dark:bg-zinc-800 overflow-hidden shadow-inner flex items-center justify-center">
                         { }
                         <img
-                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150"
+                          src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=150"
                           className="w-full h-full object-cover pointer-events-none"
                           alt="avatar"
                         />
@@ -160,7 +160,7 @@ export default function Features() {
                             : "text-base"
                         }`}
                       >
-                        Emma Watson
+                        Priya Das
                       </h4>
                     )}
 

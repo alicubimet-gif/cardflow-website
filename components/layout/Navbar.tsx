@@ -17,6 +17,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Features", href: "/features" },
+    { name: "Products", href: "/products" },
     { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
@@ -137,6 +138,7 @@ export default function Navbar() {
                 {[
                   { name: "Home", href: "/" },
                   { name: "Features", href: "/features" },
+                  { name: "Products", href: "/products" },
                   { name: "Pricing", href: "/pricing" },
                   { name: "Contact", href: "/contact" },
                   { name: "Sign In", href: `${studioUrl}/login`, isExternal: true },

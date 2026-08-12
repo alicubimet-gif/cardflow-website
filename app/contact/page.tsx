@@ -147,7 +147,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   label="Full Name *"
-                  placeholder="Emma Watson"
+                  placeholder="Anitha Krishnan"
                   error={errors.name?.message}
                   {...register("name")}
                   className="bg-zinc-50 dark:bg-[#111827] border-zinc-250 dark:border-gray-700 focus:bg-white dark:focus:bg-[#111827] text-zinc-900 dark:text-white dark:placeholder-gray-400 focus:ring-primary focus:border-primary transition-all duration-300 ease-in-out"
@@ -155,7 +155,7 @@ export default function Contact() {
                 <Input
                   label="Email Address *"
                   type="email"
-                  placeholder="emma@company.com"
+                  placeholder="anitha@farookschool.edu.in"
                   error={errors.email?.message}
                   {...register("email")}
                   className="bg-zinc-50 dark:bg-[#111827] border-zinc-250 dark:border-gray-700 focus:bg-white dark:focus:bg-[#111827] text-zinc-900 dark:text-white dark:placeholder-gray-400 focus:ring-primary focus:border-primary transition-all duration-300 ease-in-out"
@@ -264,7 +264,9 @@ export default function Contact() {
             </div>
             <div className="space-y-1 transition-colors duration-300 ease-in-out">
               <h4 className="font-extrabold text-xs text-zinc-800 dark:text-white uppercase tracking-wider transition-colors duration-300 ease-in-out">Phone Support</h4>
-              <p className="text-xs text-zinc-550 dark:text-gray-300 font-bold mt-1 transition-colors duration-300 ease-in-out">+1 (800) 555-CARD</p>
+              <p className="text-xs text-zinc-550 dark:text-gray-300 font-bold mt-1 transition-colors duration-300 ease-in-out">
+                <a href="tel:+918891633035" className="hover:underline">+91 88916 33035</a>
+              </p>
               <p className="text-[10px] text-zinc-400 dark:text-gray-500 font-medium transition-colors duration-300 ease-in-out">Toll-free Support</p>
             </div>
           </div>

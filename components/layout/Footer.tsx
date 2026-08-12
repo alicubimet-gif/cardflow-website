@@ -139,6 +139,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/products" className="hover:text-primary dark:hover:text-primary transition-colors hover:translate-x-0.5 inline-block duration-200">
+                  Products
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="hover:text-primary dark:hover:text-primary transition-colors hover:translate-x-0.5 inline-block duration-200">
                   Pricing
                 </Link>
@@ -209,8 +214,8 @@ export default function Footer() {
                 <Phone className="w-4.5 h-4.5 text-primary shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-200" />
                 <div>
                   <span className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-0.5">Phone</span>
-                  <a href="tel:+15550199234" className="hover:text-primary dark:hover:text-primary transition-colors font-medium">
-                    +1 (555) 019-9234
+                  <a href="tel:+918891633035" className="hover:text-primary dark:hover:text-primary transition-colors font-medium">
+                    +91 88916 33035
                   </a>
                 </div>
               </div>

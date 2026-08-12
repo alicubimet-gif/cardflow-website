@@ -259,7 +259,7 @@ function RegisterForm() {
             <Input
               id="register-name"
               label="Full Name"
-              placeholder="John Smith"
+              placeholder="Arjun Nair"
               autoComplete="name"
               error={errors.name?.message}
               {...register("name")}
@@ -268,7 +268,7 @@ function RegisterForm() {
               id="register-email"
               label="Email Address"
               type="email"
-              placeholder="john@company.com"
+              placeholder="arjun@malabarprint.in"
               autoComplete="email"
               error={errors.email?.message}
               {...register("email")}
@@ -295,7 +295,7 @@ function RegisterForm() {
             <Input
               id="register-company"
               label="Company Name"
-              placeholder="Acme Corp"
+              placeholder="Malabar Print Hub"
               autoComplete="organization"
               error={errors.company?.message}
               {...register("company")}

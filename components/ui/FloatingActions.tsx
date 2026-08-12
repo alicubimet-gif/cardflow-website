@@ -18,13 +18,13 @@ export default function FloatingActions() {
         </svg>
       ),
       color: "bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20",
-      href: "https://wa.me/15550199234",
+      href: "https://wa.me/918891633035",
     },
     {
       name: "Call Now",
       icon: <Phone className="w-5 h-5" />,
       color: "bg-blue-600 hover:bg-blue-700 shadow-blue-600/20",
-      href: "tel:+15550199234",
+      href: "tel:+918891633035",
     },
     {
       name: "Email Us",
