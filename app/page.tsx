@@ -27,7 +27,8 @@ import {
   Lock,
   Eye,
   CheckSquare,
-  Gift
+  Gift,
+  UserRound,
 } from "lucide-react";
 import { getPublicPricing } from "@/services/pricingService";
 import { requestDemo } from "@/services/demoService";
@@ -462,11 +463,9 @@ export default function Home() {
                   {/* Avatar */}
                   <div className="flex flex-col items-center">
                     <div className="w-24 h-24 rounded-full p-1 border-2 border-blue-500/50 mb-3 bg-slate-900 overflow-hidden shadow-inner transform hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=250" 
-                        alt="Avatar Preview" 
-                        className="w-full h-full object-cover rounded-full"
-                      />
+                      <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center">
+                        <UserRound className="w-12 h-12 text-slate-400" strokeWidth={1.5} />
+                      </div>
                     </div>
                     <h3 className="font-bold text-base text-center text-white">Ananya Nair</h3>
                     <p className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mt-1">Admin Officer</p>

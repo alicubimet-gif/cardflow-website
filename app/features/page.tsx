@@ -14,6 +14,7 @@ import {
   AlignCenter,
   AlignRight,
   Maximize,
+  UserRound,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -141,12 +142,7 @@ export default function Features() {
                   >
                     {layer.id === "photo" && (
                       <div className="relative w-20 h-20 rounded-full border-2 border-primary/20 bg-zinc-100 dark:bg-zinc-800 overflow-hidden shadow-inner flex items-center justify-center">
-                        { }
-                        <img
-                          src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=150"
-                          className="w-full h-full object-cover pointer-events-none"
-                          alt="avatar"
-                        />
+                        <UserRound className="w-10 h-10 text-zinc-400 dark:text-zinc-500 pointer-events-none" strokeWidth={1.5} />
                       </div>
                     )}
 

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { CreditCard, Award, QrCode, Sparkles, ShieldCheck, RotateCw } from "lucide-react";
+import { CreditCard, Award, QrCode, Sparkles, ShieldCheck, RotateCw, UserRound } from "lucide-react";
 
 type TemplateId = "corporate" | "academic" | "premium";
 
@@ -38,27 +38,11 @@ const TEMPLATES: Record<TemplateId, TemplateStyle> = {
   },
 };
 
-const AVATARS = [
-  {
-    name: "Staff",
-    url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=250",
-  },
-  {
-    name: "Faculty",
-    url: "https://images.unsplash.com/photo-1615109398623-88346a601842?auto=format&fit=crop&q=80&w=250",
-  },
-  {
-    name: "Student",
-    url: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=250",
-  },
-];
-
 export default function InteractiveCardDemo() {
   const [template, setTemplate] = useState<TemplateId>("corporate");
   const [name, setName] = useState("Ananya Nair");
   const [title, setTitle] = useState("Admin Officer");
   const [idNum, setIdNum] = useState("Z-CF-892410");
-  const [avatar, setAvatar] = useState(AVATARS[0].url);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const style = TEMPLATES[template];
@@ -121,13 +105,8 @@ export default function InteractiveCardDemo() {
                 {/* Profile Section */}
                 <div className="flex flex-col items-center my-6">
                   <div className="relative w-28 h-28 rounded-full p-1 border-2 mb-3 shadow-md transition-all duration-500" style={{ borderColor: style.accent }}>
-                    <div className="w-full h-full rounded-full overflow-hidden bg-zinc-800 border border-black/20">
-                      { }
-                      <img
-                        src={avatar}
-                        alt={name}
-                        className="w-full h-full object-cover"
-                      />
+                    <div className="w-full h-full rounded-full overflow-hidden bg-zinc-800 border border-black/20 flex items-center justify-center">
+                      <UserRound className="w-14 h-14 text-zinc-400" strokeWidth={1.5} />
                     </div>
                     <div
                       className="absolute -bottom-1 -right-1 p-1.5 rounded-full text-white text-[10px] shadow"
@@ -324,29 +303,6 @@ export default function InteractiveCardDemo() {
               className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-950 focus:outline-none focus:border-blue-600 dark:focus:border-blue-400 text-slate-900 dark:text-white transition-colors"
               maxLength={15}
             />
-          </div>
-
-          {/* Photo preset */}
-          <div className="space-y-1">
-            <label className="block text-xs font-bold text-slate-400 dark:text-slate-500">Cardholder Avatar</label>
-            <div className="flex gap-2.5 pt-1">
-              {AVATARS.map((av, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setAvatar(av.url);
-                    scrollToPreview();
-                  }}
-                  className={`w-9 h-9 rounded-full overflow-hidden border-2 transition-all cursor-pointer ${
-                    avatar === av.url ? "border-blue-600 scale-110" : "border-slate-200 dark:border-slate-800 hover:scale-105"
-                  }`}
-                  title={av.name}
-                >
-                  { }
-                  <img src={av.url} alt={av.name} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       </div>
