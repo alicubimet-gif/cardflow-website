@@ -7,6 +7,7 @@ import {
   getPublicTestimonials,
   type PublicTestimonial,
 } from "@/services/marketingService";
+import SmoothCarousel from "@/components/ui/SmoothCarousel";
 
 export default function TestimonialsSection() {
   const [items, setItems] = useState<PublicTestimonial[]>([]);
@@ -49,37 +50,25 @@ export default function TestimonialsSection() {
         </motion.div>
 
         {loading ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-64 animate-pulse rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
-              />
-            ))}
-          </div>
+          <div className="mx-auto h-64 max-w-md animate-pulse rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900" />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {items.map((t, idx) => (
-              <motion.div
+          <SmoothCarousel>
+            {items.map((t) => (
+              <div
                 key={t.id}
-                initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.15, ease: "easeOut" }}
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between hover-glow"
+                className="flex h-full min-h-[280px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900"
               >
                 <div>
-                  <div className="flex items-center gap-1 mb-4 text-amber-500">
+                  <div className="mb-4 flex items-center gap-1 text-amber-500">
                     {[...Array(Math.max(1, Math.min(5, t.rating || 5)))].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
+                      <Star key={i} className="h-4 w-4 fill-current" />
                     ))}
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-350 italic leading-relaxed font-medium">
+                  <p className="text-sm font-medium italic leading-relaxed text-slate-600 dark:text-slate-300">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
                   <div className="size-11 shrink-0 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
                     {t.photo_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -95,15 +84,15 @@ export default function TestimonialsSection() {
                     )}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">{t.author}</h4>
-                    <p className="text-xs text-slate-400 dark:text-slate-500 font-semibold mt-0.5">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.author}</h4>
+                    <p className="mt-0.5 text-xs font-semibold text-slate-400 dark:text-slate-500">
                       {t.role}
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </SmoothCarousel>
         )}
       </div>
     </section>

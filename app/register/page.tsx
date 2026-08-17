@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck, ArrowRight, AlertTriangle, Mail, RefreshCw } from "lucide-react";
+import { ArrowRight, AlertTriangle, Mail, RefreshCw } from "lucide-react";
 import { SignupSchema, SignupInput } from "@/lib/schemas";
 import { registerSubscriber } from "@/services/authService";
 import Input from "@/components/ui/Input";
@@ -323,10 +323,13 @@ function RegisterForm() {
             </Button>
           </div>
 
-          <div className="flex items-center justify-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>Secure 256-bit encryption. Your data is safe.</span>
-          </div>
+          <p className="pt-4 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
+            By creating an account you agree to our{" "}
+            <Link href="/privacy" className="font-semibold text-primary hover:underline">
+              Privacy &amp; Policy
+            </Link>
+            .
+          </p>
         </form>
 
         <p className="text-center text-xs text-slate-500 dark:text-slate-400">

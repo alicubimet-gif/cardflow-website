@@ -30,7 +30,7 @@ export default function FloatingActions() {
       name: "Email Us",
       icon: <Mail className="w-5 h-5" />,
       color: "bg-teal-500 hover:bg-teal-600 shadow-teal-500/20",
-      href: "mailto:support@zamirzac.com",
+      href: "mailto:info@zamirzac.com",
     },
   ];
 

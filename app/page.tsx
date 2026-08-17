@@ -36,6 +36,7 @@ import { useToast } from "@/components/ui/Toast";
 import InteractiveCardDemo from "@/components/sections/InteractiveCardDemo";
 import ProductsShowcase from "@/components/sections/ProductsShowcase";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import SmoothCarousel from "@/components/ui/SmoothCarousel";
 import FaqsSection from "@/components/sections/FaqsSection";
 import TeamSection from "@/components/sections/TeamSection";
 import Button from "@/components/ui/Button";
@@ -152,7 +153,7 @@ export default function Home() {
         }
         const active = parsed.filter((p: any) => p.status === "active");
         active.sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
-        setPackages(active.slice(0, 3)); // Display top 3
+        setPackages(active);
         setPackagesError(false);
       } catch (err: any) {
         setPackagesError(true);
@@ -893,70 +894,80 @@ export default function Home() {
             </Link>
           </motion.div>
         ) : (
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch pt-4 text-left"
-          >
-            {packages.map((pkg) => {
-              const currencySymbol = pkg.currency?.toLowerCase() === 'usd' ? '$' : '₹';
-              return (
-                <motion.div
-                  key={pkg.id}
-                  variants={fadeUpVariant}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className={`relative rounded-2xl p-8 border bg-white dark:bg-slate-900 flex flex-col justify-between shadow-md transition-all duration-300 ${
-                    pkg.is_popular ? "border-[#2563EB] ring-2 ring-[#2563EB]/25" : "border-slate-200 dark:border-slate-850"
-                  } hover-glow`}
-                >
-                  {pkg.is_popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-widest bg-[#2563EB] text-white flex items-center gap-1 shadow-sm">
-                      <Sparkles size={10} className="fill-current" /> Most Popular
-                    </span>
-                  )}
-
-                  <div className="space-y-5">
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-base font-extrabold text-slate-900 dark:text-white font-heading">{pkg.package_name}</h3>
-                      <span className="bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-100 dark:border-blue-900/30">
-                        Credits Pack
+          <div className="pt-4 text-left">
+            <SmoothCarousel>
+              {packages.map((pkg) => {
+                const currencySymbol = pkg.currency?.toLowerCase() === "usd" ? "$" : "₹";
+                return (
+                  <div
+                    key={pkg.id}
+                    className={`relative flex h-full min-h-[360px] flex-col justify-between rounded-2xl border bg-white p-8 shadow-md dark:bg-slate-900 ${
+                      pkg.is_popular
+                        ? "border-[#2563EB] ring-2 ring-[#2563EB]/25"
+                        : "border-slate-200 dark:border-slate-800"
+                    }`}
+                  >
+                    {pkg.is_popular && (
+                      <span className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-[#2563EB] px-3.5 py-1 text-[9px] font-extrabold uppercase tracking-widest text-white shadow-sm">
+                        <Sparkles size={10} className="fill-current" /> Most Popular
                       </span>
-                    </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium min-h-[40px]">{pkg.description}</p>
-                    
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-xl font-bold text-slate-900 dark:text-white">{currencySymbol}</span>
-                      <span className="text-4xl font-black text-slate-900 dark:text-white font-heading">
-                        {typeof pkg.price === 'number' ? pkg.price.toLocaleString('en-IN') : parseFloat(pkg.price as string).toLocaleString('en-IN')}
-                      </span>
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase ml-1">/ one-time</span>
+                    )}
+
+                    <div className="space-y-5">
+                      <div className="flex items-start justify-between">
+                        <h3 className="font-heading text-base font-extrabold text-slate-900 dark:text-white">
+                          {pkg.package_name}
+                        </h3>
+                        <span className="rounded border border-blue-100 bg-blue-50 px-2 py-0.5 text-[10px] font-bold text-blue-600 dark:border-blue-900/30 dark:bg-blue-950/40 dark:text-blue-400">
+                          Credits Pack
+                        </span>
+                      </div>
+                      <p className="min-h-[40px] text-xs font-medium leading-relaxed text-slate-500 dark:text-slate-400">
+                        {pkg.description}
+                      </p>
+
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xl font-bold text-slate-900 dark:text-white">
+                          {currencySymbol}
+                        </span>
+                        <span className="font-heading text-4xl font-black text-slate-900 dark:text-white">
+                          {typeof pkg.price === "number"
+                            ? pkg.price.toLocaleString("en-IN")
+                            : parseFloat(pkg.price as string).toLocaleString("en-IN")}
+                        </span>
+                        <span className="ml-1 text-[10px] font-bold uppercase text-slate-400 dark:text-slate-500">
+                          / one-time
+                        </span>
+                      </div>
+
+                      <div className="h-px bg-slate-100 dark:bg-slate-800" />
+                      <div className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-3.5 dark:border-slate-800 dark:bg-slate-950">
+                        <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                          Prints Credit quota
+                        </span>
+                        <span className="font-heading text-sm font-black text-blue-600 dark:text-blue-400">
+                          {pkg.credits.toLocaleString()} Prints
+                        </span>
+                      </div>
                     </div>
 
-                    <div className="h-px bg-slate-100 dark:bg-slate-800" />
-                    <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-100 dark:border-slate-850 flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400">Prints Credit quota</span>
-                      <span className="text-sm font-black text-blue-600 dark:text-blue-400 font-heading">{pkg.credits.toLocaleString()} Prints</span>
+                    <div className="mt-8 border-t border-slate-50 pt-4 dark:border-slate-800">
+                      <button
+                        onClick={() => handleCheckout(pkg.id)}
+                        className={`flex h-10 w-full cursor-pointer items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                          pkg.is_popular
+                            ? "bg-[#2563EB] text-white shadow-sm shadow-blue-500/10 hover:bg-blue-700 hover:shadow-blue-500/20"
+                            : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                        }`}
+                      >
+                        Buy Package <ArrowRight size={13} />
+                      </button>
                     </div>
                   </div>
-
-                  <div className="mt-8 pt-4 border-t border-slate-50 dark:border-slate-850">
-                    <button
-                      onClick={() => handleCheckout(pkg.id)}
-                      className={`w-full justify-center py-2.5 flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider h-10 rounded-xl transition-all duration-200 cursor-pointer ${
-                        pkg.is_popular 
-                          ? "bg-[#2563EB] hover:bg-blue-700 text-white shadow-sm shadow-blue-500/10 hover:shadow-blue-500/20" 
-                          : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200"
-                      }`}
-                    >
-                      Buy Package <ArrowRight size={13} />
-                    </button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                );
+              })}
+            </SmoothCarousel>
+          </div>
         )}
       </section>
 
@@ -1053,7 +1064,7 @@ export default function Home() {
                 <div className="space-y-1 text-left">
                   <h4 className="font-extrabold text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider">Support Email</h4>
                   <p className="text-xs text-slate-750 dark:text-slate-300 font-bold mt-1">
-                    <a href="mailto:support@zcards.in" className="hover:underline">support@zcards.in</a>
+                    <a href="mailto:info@zamirzac.com" className="hover:underline">info@zamirzac.com</a>
                   </p>
                   <p className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">24/7 Response Desk</p>
                 </div>

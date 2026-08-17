@@ -13,7 +13,10 @@ export async function POST(request: Request) {
       body: JSON.stringify(body),
     });
 
-    const data = await res.json();
+    const data = await res.json().catch(() => ({
+      success: false,
+      message: "Unable to request demo.",
+    }));
 
     return NextResponse.json(data, { status: res.status });
   } catch {

@@ -45,7 +45,9 @@ export default function Contact() {
         message: data.message,
       };
       await sendContactForm(payload);
-      setSubmitSuccess("Thank you for contacting us. We will get back to you shortly.");
+      setSubmitSuccess(
+        "Thank you for contacting us. Your message is in Z Cards Control under Tickets — an agent will get back to you shortly."
+      );
       reset();
     } catch (err: any) {
       const validationErrors = formatValidationErrors(err);
@@ -279,7 +281,7 @@ export default function Contact() {
             <div className="space-y-1 transition-colors duration-300 ease-in-out">
               <h4 className="font-extrabold text-xs text-zinc-800 dark:text-white uppercase tracking-wider transition-colors duration-300 ease-in-out">Support Email</h4>
               <p className="text-xs text-zinc-550 dark:text-gray-300 font-bold mt-1 transition-colors duration-300 ease-in-out">
-                <a href="mailto:support@zcards.in" className="hover:underline">support@zcards.in</a>
+                <a href="mailto:info@zamirzac.com" className="hover:underline">info@zamirzac.com</a>
               </p>
               <p className="text-[10px] text-zinc-400 dark:text-gray-500 font-medium transition-colors duration-300 ease-in-out">24/7 Response Desk</p>
             </div>

@@ -2,6 +2,9 @@ export const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '/server';
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || '';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || APP_URL || 'http://localhost:3000';
 
+/** Canonical public Privacy & Policy URL. Apps should deep-link here. */
+export const PRIVACY_POLICY_URL = `${SITE_URL.replace(/\/$/, '')}/privacy`;
+
 /**
  * Studio Hub / Studio App URL.
  * Prefer NEXT_PUBLIC_STUDIO_URL; also accept STUDIO_APP_URL / NEXT_PUBLIC_STUDIO_APP_URL

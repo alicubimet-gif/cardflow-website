@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const res = await fetch(getBackendApiUrl("leads/"), {
+    const res = await fetch(getBackendApiUrl("public/contact/"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -13,7 +13,10 @@ export async function POST(request: Request) {
       body: JSON.stringify(body),
     });
 
-    const data = await res.json();
+    const data = await res.json().catch(() => ({
+      success: false,
+      message: "Unable to send message.",
+    }));
 
     return NextResponse.json(data, { status: res.status });
   } catch {

@@ -124,7 +124,7 @@ export default function ProductsShowcase({
       </div>
 
       {loading ? (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid w-full max-w-5xl justify-center gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),280px))]">
           {Array.from({ length: limit }).map((_, i) => (
             <div
               key={i}
@@ -137,7 +137,7 @@ export default function ProductsShowcase({
           {error}
         </p>
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid w-full max-w-5xl justify-center gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),280px))]">
           {products.map((product) => (
             <ProductTile key={product.id} product={product} />
           ))}

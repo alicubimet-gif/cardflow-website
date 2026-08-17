@@ -205,8 +205,8 @@ export default function Footer() {
                 <Mail className="w-4.5 h-4.5 text-primary shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-200" />
                 <div>
                   <span className="block text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-0.5">Email</span>
-                  <a href="mailto:support@zamirzac.com" className="hover:text-primary dark:hover:text-primary transition-colors font-medium">
-                    support@zamirzac.com
+                  <a href="mailto:info@zamirzac.com" className="hover:text-primary dark:hover:text-primary transition-colors font-medium">
+                    info@zamirzac.com
                   </a>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function Footer() {
           
           <nav className="flex items-center gap-6 text-xs text-slate-500 dark:text-zinc-400 flex-wrap justify-center" aria-label="Footer legal and utilities">
             <Link href="/privacy" className="hover:text-primary dark:hover:text-primary transition-colors">
-              Privacy Policy
+              Privacy &amp; Policy
             </Link>
             <Link href="/terms" className="hover:text-primary dark:hover:text-primary transition-colors">
               Terms
