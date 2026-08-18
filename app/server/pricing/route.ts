@@ -1,6 +1,23 @@
 import { NextResponse } from "next/server";
 import { getBackendApiUrl } from "@/lib/config";
 
+function highestBenefitIndex(packages: Array<{ credits?: number; total_credits?: number; price?: number | string }>) {
+  let best = -1;
+  let bestScore = -1;
+  let bestCredits = -1;
+  packages.forEach((pkg, index) => {
+    const credits = Math.max(Number(pkg.credits ?? pkg.total_credits) || 0, 0);
+    const price = Math.max(Number(pkg.price) || 0, 0);
+    const score = credits <= 0 ? 0 : price <= 0 ? Number.POSITIVE_INFINITY : credits / price;
+    if (score > bestScore || (score === bestScore && credits > bestCredits)) {
+      best = index;
+      bestScore = score;
+      bestCredits = credits;
+    }
+  });
+  return best;
+}
+
 /**
  * GET /server/pricing
  *
@@ -47,8 +64,8 @@ export async function GET() {
         ? payload
         : [];
 
-    // Highlight the mid-priced active package as "popular" for marketing cards.
-    const midIndex = results.length > 1 ? Math.floor(results.length / 2) : -1;
+    // Highlight the highest-benefit pack (most credits per rupee, then most credits).
+    const popularIndex = highestBenefitIndex(results);
 
     const data = results.map((pkg, index) => ({
       id: pkg.id,
@@ -57,7 +74,7 @@ export async function GET() {
       price: pkg.price,
       currency: pkg.currency || "INR",
       description: pkg.description || "",
-      is_popular: Boolean(pkg.is_popular) || index === midIndex,
+      is_popular: index === popularIndex,
       status: pkg.is_active === false ? "inactive" : "active",
       display_order: pkg.sort_order ?? pkg.display_order ?? index,
     }));

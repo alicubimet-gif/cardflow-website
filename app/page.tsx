@@ -468,7 +468,7 @@ export default function Home() {
                         <UserRound className="w-12 h-12 text-slate-400" strokeWidth={1.5} />
                       </div>
                     </div>
-                    <h3 className="font-bold text-base text-center text-white">Ananya Nair</h3>
+                    <h3 className="font-bold text-base text-center text-white">Ananya K</h3>
                     <p className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mt-1">Admin Officer</p>
                   </div>
 
@@ -895,7 +895,7 @@ export default function Home() {
           </motion.div>
         ) : (
           <div className="pt-4 text-left">
-            <SmoothCarousel>
+            <SmoothCarousel startIndex={Math.max(0, packages.findIndex((p) => p.is_popular))}>
               {packages.map((pkg) => {
                 const currencySymbol = pkg.currency?.toLowerCase() === "usd" ? "$" : "₹";
                 return (

@@ -130,7 +130,7 @@ function CompleteProfileForm() {
                 inputMode="numeric"
                 autoComplete="tel"
                 maxLength={10}
-                placeholder="9876543210"
+                placeholder="90000000000"
                 className="pl-10"
                 error={errors.phone?.message}
                 {...register("phone", {

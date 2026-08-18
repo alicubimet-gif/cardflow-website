@@ -171,7 +171,7 @@ export default function Contact() {
                   inputMode="numeric"
                   autoComplete="tel"
                   maxLength={10}
-                  placeholder="9876543210"
+                  placeholder="90000000000"
                   error={errors.phone?.message}
                   {...register("phone", {
                     onChange: (e) => {

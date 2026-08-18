@@ -51,7 +51,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     const [selectedCode, setSelectedCode] = useState('+91');
     const [nationalNumber, setNationalNumber] = useState('');
 
-    // Parse incoming value (e.g. "+919876543210" or "9876543210")
+    // Parse incoming value (e.g. "+9190000000000" or "90000000000")
     useEffect(() => {
       const trimmedValue = (value || '').trim();
       if (!trimmedValue) {

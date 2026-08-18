@@ -127,7 +127,7 @@ function EnquiryContent() {
             <Input
               label="Work Email Address"
               type="email"
-              placeholder="riyas@malabarprint.in"
+              placeholder="riyas@example.com"
               error={errors.email?.message}
               {...register("email")}
             />
@@ -140,7 +140,7 @@ function EnquiryContent() {
               inputMode="numeric"
               autoComplete="tel"
               maxLength={10}
-              placeholder="9876543210"
+              placeholder="90000000000"
               error={errors.phone?.message}
               {...register("phone", {
                 onChange: (e) => {

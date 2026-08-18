@@ -10,10 +10,12 @@ export default function SmoothCarousel({
   children,
   autoPlayMs = 5000,
   className = "",
+  startIndex = 0,
 }: {
   children: React.ReactNode;
   autoPlayMs?: number;
   className?: string;
+  startIndex?: number;
 }) {
   const items = React.Children.toArray(children).filter(Boolean);
   const count = items.length;
@@ -25,6 +27,11 @@ export default function SmoothCarousel({
   const x = useMotionValue(0);
   const busy = useRef(false);
   const indexRef = useRef(0);
+  const startRef = useRef(startIndex);
+
+  useEffect(() => {
+    startRef.current = startIndex;
+  }, [startIndex]);
 
   useEffect(() => {
     indexRef.current = index;
@@ -60,11 +67,12 @@ export default function SmoothCarousel({
 
   useEffect(() => {
     if (!slideW) return;
-    const next = loop ? base + (indexRef.current % Math.max(count, 1)) : indexRef.current;
+    const preferred = ((startRef.current % Math.max(count, 1)) + Math.max(count, 1)) % Math.max(count, 1);
+    const next = loop ? base + preferred : preferred;
     setIndex(next);
     x.set(xFor(next));
     setReady(true);
-  }, [base, count, loop, slideW, x, xFor]);
+  }, [base, count, loop, slideW, startIndex, x, xFor]);
 
   const slideTo = useCallback(
     (next: number) => {
