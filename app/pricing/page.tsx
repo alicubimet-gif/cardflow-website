@@ -7,6 +7,15 @@ import { useToast } from "@/components/ui/Toast";
 import LoadingState from "@/components/loading-state";
 import ApiError from "@/components/api-error";
 import { getPublicPricing } from "@/services/pricingService";
+import {
+  CreditRatesLegend,
+  PackageCreditDetails,
+} from "@/components/pricing/PackageCreditDetails";
+import {
+  DEFAULT_CREDIT_RATES,
+  parseCreditRates,
+  type CreditRates,
+} from "@/lib/creditPricing";
 
 interface CreditPackage {
   id: string;
@@ -23,6 +32,7 @@ export default function Pricing() {
   const router = useRouter();
   const { showToast } = useToast();
   const [packages, setPackages] = useState<CreditPackage[]>([]);
+  const [rates, setRates] = useState<CreditRates>(DEFAULT_CREDIT_RATES);
   const [loading, setLoading] = useState(true);
   const [checkoutLoadingId, setCheckoutLoadingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +49,7 @@ export default function Pricing() {
       const filtered = parsedPackages.filter((pkg: any) => pkg.status === "active");
       filtered.sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
       setPackages(filtered);
+      setRates(parseCreditRates(pricing?.credit_rates));
     } catch (err: any) {
       setError("Unable to load pricing plans. Please try again later.");
       showToast("Unable to load pricing plans. Please try again later.", "error");
@@ -53,13 +64,10 @@ export default function Pricing() {
 
   const handleCheckout = (pkgId: string) => {
     setCheckoutLoadingId(pkgId);
-    // Public website — always redirect to register with context preserved.
-    // Once registered the user is directed to Studio where they can purchase credits.
     showToast("Please create an account to purchase credits.", "info");
     router.push(`/register?next=buy&package_id=${pkgId}`);
     setCheckoutLoadingId(null);
   };
-
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
@@ -72,14 +80,14 @@ export default function Pricing() {
         </p>
       </div>
 
-      {/* Loading Skeletons */}
+      {!loading && !error && packages.length > 0 ? <CreditRatesLegend rates={rates} /> : null}
+
       {loading && (
         <div className="py-8">
           <LoadingState message="Loading packages..." />
         </div>
       )}
 
-      {/* GET packages API Error state */}
       {!loading && error && (
         <div className="py-8">
           <ApiError
@@ -90,7 +98,6 @@ export default function Pricing() {
         </div>
       )}
 
-      {/* API Empty state */}
       {!loading && !error && packages.length === 0 && (
         <div className="text-center py-12 px-4 bg-white dark:bg-slate-900 rounded-2xl border border-gray-150 dark:border-slate-800 shadow-sm max-w-md mx-auto space-y-3.5">
           <div className="w-12 h-12 bg-blue-50 dark:bg-blue-950 text-blue-500 rounded-full flex items-center justify-center mx-auto">
@@ -102,11 +109,10 @@ export default function Pricing() {
         </div>
       )}
 
-      {/* Package configuration listings (Real Backend packages only) */}
       {!loading && !error && packages.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch pt-4">
           {packages.map((pkg) => {
-            const currencySymbol = pkg.currency?.toLowerCase() === 'usd' ? '$' : '₹';
+            const currencySymbol = pkg.currency?.toLowerCase() === "usd" ? "$" : "₹";
 
             return (
               <div
@@ -126,25 +132,41 @@ export default function Pricing() {
                 <div className="text-left space-y-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-lg font-extrabold text-gray-900 dark:text-white font-heading">{pkg.package_name}</h3>
-                      <p className="text-xs text-gray-500 dark:text-slate-405 leading-relaxed mt-2 min-h-[40px] font-medium">{pkg.description}</p>
+                      <h3 className="text-lg font-extrabold text-gray-900 dark:text-white font-heading">
+                        {pkg.package_name}
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-slate-405 leading-relaxed mt-2 min-h-[40px] font-medium">
+                        {pkg.description}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white mr-1">{currencySymbol}</span>
-                    <span className="text-5xl font-black text-gray-900 dark:text-white font-heading tracking-tight">
-                      {typeof pkg.price === 'number' ? pkg.price.toLocaleString('en-IN') : parseFloat(pkg.price as string).toLocaleString('en-IN')}
+                    <span className="text-2xl font-bold text-gray-900 dark:text-white mr-1">
+                      {currencySymbol}
                     </span>
-                    <span className="text-xs text-gray-400 dark:text-slate-500 font-bold tracking-wider uppercase ml-1.5">/ one-time</span>
+                    <span className="text-5xl font-black text-gray-900 dark:text-white font-heading tracking-tight">
+                      {typeof pkg.price === "number"
+                        ? pkg.price.toLocaleString("en-IN")
+                        : parseFloat(pkg.price as string).toLocaleString("en-IN")}
+                    </span>
                   </div>
 
                   <div className="h-px bg-gray-100 dark:bg-slate-800 my-2" />
 
                   <div className="flex items-center gap-2.5 bg-blue-50/50 dark:bg-blue-950/40 border border-blue-100/60 dark:border-blue-900/30 text-[#2563EB] dark:text-blue-400 p-4 rounded-xl shadow-inner">
                     <Wallet size={20} className="shrink-0 text-blue-500 dark:text-blue-400" />
-                    <span className="font-extrabold text-base tracking-wide">{pkg.credits.toLocaleString()} Credits</span>
+                    <span className="font-extrabold text-base tracking-wide">
+                      {pkg.credits.toLocaleString("en-IN")} Credits
+                    </span>
                   </div>
+
+                  <PackageCreditDetails
+                    credits={pkg.credits}
+                    price={pkg.price}
+                    currencySymbol={currencySymbol}
+                    rates={rates}
+                  />
 
                   <ul className="space-y-3 text-xs text-gray-500 dark:text-slate-400 font-semibold pt-2">
                     <li className="flex items-start gap-2 leading-relaxed">
@@ -169,7 +191,7 @@ export default function Pricing() {
                     style={{
                       backgroundColor: pkg.is_popular ? "#2563EB" : "transparent",
                       color: pkg.is_popular ? "#FFFFFF" : "#374151",
-                      border: pkg.is_popular ? "none" : "1px solid #D1D5DB"
+                      border: pkg.is_popular ? "none" : "1px solid #D1D5DB",
                     }}
                     onMouseEnter={(e) => {
                       if (pkg.is_popular) e.currentTarget.style.backgroundColor = "#1D4ED8";

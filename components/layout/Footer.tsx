@@ -248,7 +248,7 @@ export default function Footer() {
         {/* Lower footer with Divider */}
         <div className="pt-8 border-t border-card-border/80 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-xs text-slate-500 dark:text-zinc-500 flex flex-wrap items-center gap-1.5 justify-center md:justify-start">
-            <span>&copy; {new Date().getFullYear()} Z Cards. All rights reserved.</span>
+            <span>&copy; 2026 Zamirzac. All rights reserved.</span>
             <span className="hidden md:inline text-slate-300 dark:text-zinc-800">|</span>
             <span className="flex items-center gap-1">
               Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" /> for card makers

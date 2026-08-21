@@ -39,6 +39,15 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import SmoothCarousel from "@/components/ui/SmoothCarousel";
 import FaqsSection from "@/components/sections/FaqsSection";
 import TeamSection from "@/components/sections/TeamSection";
+import {
+  CreditRatesLegend,
+  PackageCreditDetails,
+} from "@/components/pricing/PackageCreditDetails";
+import {
+  DEFAULT_CREDIT_RATES,
+  parseCreditRates,
+  type CreditRates,
+} from "@/lib/creditPricing";
 import Button from "@/components/ui/Button";
 import { PhoneInput } from "@/components/ui/PhoneInput";
 import { GOOGLE_MAPS_URL } from "@/lib/config";
@@ -114,6 +123,7 @@ export default function Home() {
 
   // Form & Packages state
   const [packages, setPackages] = useState<CreditPackage[]>([]);
+  const [creditRates, setCreditRates] = useState<CreditRates>(DEFAULT_CREDIT_RATES);
   const [loadingPackages, setLoadingPackages] = useState(true);
   const [packagesError, setPackagesError] = useState(false);
   const [enquiryName, setEnquiryName] = useState("");
@@ -154,6 +164,7 @@ export default function Home() {
         const active = parsed.filter((p: any) => p.status === "active");
         active.sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
         setPackages(active);
+        setCreditRates(parseCreditRates(data?.credit_rates));
         setPackagesError(false);
       } catch (err: any) {
         setPackagesError(true);
@@ -866,6 +877,10 @@ export default function Home() {
           </p>
         </motion.div>
 
+        {!loadingPackages && !packagesError && packages.length > 0 ? (
+          <CreditRatesLegend rates={creditRates} />
+        ) : null}
+
         {loadingPackages ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
             {[1, 2, 3].map((item) => (
@@ -901,7 +916,7 @@ export default function Home() {
                 return (
                   <div
                     key={pkg.id}
-                    className={`relative flex h-full min-h-[360px] flex-col justify-between rounded-2xl border bg-white p-8 shadow-md dark:bg-slate-900 ${
+                    className={`relative flex h-full min-h-[520px] flex-col justify-between rounded-2xl border bg-white p-8 shadow-md dark:bg-slate-900 ${
                       pkg.is_popular
                         ? "border-[#2563EB] ring-2 ring-[#2563EB]/25"
                         : "border-slate-200 dark:border-slate-800"
@@ -935,20 +950,25 @@ export default function Home() {
                             ? pkg.price.toLocaleString("en-IN")
                             : parseFloat(pkg.price as string).toLocaleString("en-IN")}
                         </span>
-                        <span className="ml-1 text-[10px] font-bold uppercase text-slate-400 dark:text-slate-500">
-                          / one-time
-                        </span>
                       </div>
 
                       <div className="h-px bg-slate-100 dark:bg-slate-800" />
                       <div className="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-3.5 dark:border-slate-800 dark:bg-slate-950">
                         <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
-                          Prints Credit quota
+                          Credit quota
                         </span>
                         <span className="font-heading text-sm font-black text-blue-600 dark:text-blue-400">
-                          {pkg.credits.toLocaleString()} Prints
+                          {pkg.credits.toLocaleString("en-IN")} credits
                         </span>
                       </div>
+
+                      <PackageCreditDetails
+                        credits={pkg.credits}
+                        price={pkg.price}
+                        currencySymbol={currencySymbol}
+                        rates={creditRates}
+                        compact
+                      />
                     </div>
 
                     <div className="mt-8 border-t border-slate-50 pt-4 dark:border-slate-800">

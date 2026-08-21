@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getBackendApiUrl } from "@/lib/config";
+import { DEFAULT_CREDIT_RATES, parseCreditRates } from "@/lib/creditPricing";
 
 function highestBenefitIndex(packages: Array<{ credits?: number; total_credits?: number; price?: number | string }>) {
   let best = -1;
@@ -23,10 +24,8 @@ function highestBenefitIndex(packages: Array<{ credits?: number; total_credits?:
  *
  * Proxies to: GET /api/public/packages/
  *
- * Normalises the ZCards package payload into the shape the Pricing / Home UI
- * already expects so the pages do not need UI changes:
- *   { data: [{ id, package_name, credits, price, currency, description,
- *              is_popular, status, display_order }] }
+ * Returns:
+ *   { data: [...packages], credit_rates: { single, double, dynamic } }
  */
 export async function GET() {
   try {
@@ -64,7 +63,6 @@ export async function GET() {
         ? payload
         : [];
 
-    // Highlight the highest-benefit pack (most credits per rupee, then most credits).
     const popularIndex = highestBenefitIndex(results);
 
     const data = results.map((pkg, index) => ({
@@ -79,7 +77,9 @@ export async function GET() {
       display_order: pkg.sort_order ?? pkg.display_order ?? index,
     }));
 
-    return NextResponse.json({ data }, { status: 200 });
+    const credit_rates = parseCreditRates(payload?.credit_rates ?? DEFAULT_CREDIT_RATES);
+
+    return NextResponse.json({ data, credit_rates }, { status: 200 });
   } catch {
     return NextResponse.json(
       {
