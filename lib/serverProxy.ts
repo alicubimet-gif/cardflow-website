@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getBackendApiUrl, getBackendUrl } from "./config";
+import { getBackendApiUrl, getBackendUrl } from "./backend-server";
 
 export async function proxyRequest(req: NextRequest, backendPath: string) {
   const backendUrl = getBackendUrl();
   if (!backendUrl) {
     return NextResponse.json(
-      { success: false, message: "BACKEND_URL or NEXT_PUBLIC_BACKEND_URL is required." },
+      { success: false, message: "BACKEND_URL is required for server-side API proxying." },
       { status: 500 }
     );
   }

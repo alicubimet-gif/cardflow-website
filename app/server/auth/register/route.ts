@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBackendApiUrl } from "@/lib/config";
+import { getBackendApiUrl } from "@/lib/backend-server";
 
 /**
  * Legacy passthrough — prefer `/server/auth/register-subscriber`.

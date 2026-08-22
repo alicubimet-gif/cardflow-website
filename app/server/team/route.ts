@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getBackendApiUrl } from "@/lib/config";
+import { getBackendApiUrl } from "@/lib/backend-server";
+import { sanitizePublicPayload } from "@/lib/public-media";
 
 export async function GET() {
   try {
@@ -28,7 +29,7 @@ export async function GET() {
       : Array.isArray(payload)
         ? payload
         : [];
-    return NextResponse.json({ data: results }, { status: 200 });
+    return NextResponse.json({ data: sanitizePublicPayload(results) }, { status: 200 });
   } catch {
     return NextResponse.json(
       { success: false, message: "Unable to load team." },

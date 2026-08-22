@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBackendApiUrl } from "@/lib/config";
+import { getBackendApiUrl } from "@/lib/backend-server";
 import { DEFAULT_CREDIT_RATES, parseCreditRates } from "@/lib/creditPricing";
 
 function highestBenefitIndex(packages: Array<{ credits?: number; total_credits?: number; price?: number | string }>) {

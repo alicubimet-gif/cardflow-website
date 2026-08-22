@@ -50,18 +50,30 @@ export async function getPublicProduct(id: string): Promise<PublicProduct> {
   return res.data;
 }
 
+import { publicMediaUrl } from "@/lib/public-media";
+
 export function productImageUrl(
   product: Pick<PublicProduct, "images"> | null | undefined,
 ): string | null {
-  const backend = (process.env.NEXT_PUBLIC_BACKEND_URL || "").replace(/\/$/, "");
   for (const img of product?.images || []) {
-    if (typeof img === "string" && img) return img;
+    if (typeof img === "string" && img) {
+      if (img.startsWith("/server/media/")) return img;
+      if (img.startsWith("/api/v1/storage/files/")) {
+        const match = img.match(/\/files\/([0-9a-f-]{36})\/content\/?/i);
+        if (match) return publicMediaUrl(match[1]);
+      }
+      if (img.startsWith("http")) return img;
+      return img;
+    }
     if (img && typeof img === "object") {
       const id = typeof img.id === "string" ? img.id : null;
-      if (id && backend) {
-        return `${backend}/api/v1/storage/files/${id}/content/`;
+      if (id) return publicMediaUrl(id);
+      if (img.url) {
+        if (img.url.startsWith("/server/media/")) return img.url;
+        const match = String(img.url).match(/\/files\/([0-9a-f-]{36})\/content\/?/i);
+        if (match) return publicMediaUrl(match[1]);
+        return img.url;
       }
-      if (img.url) return img.url;
     }
   }
   return null;

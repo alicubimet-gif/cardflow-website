@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getBackendApiUrl } from "@/lib/config";
+import { getBackendApiUrl } from "@/lib/backend-server";
+import { sanitizePublicPayload } from "@/lib/public-media";
 
 /**
  * GET /server/products/[id]
@@ -42,7 +43,7 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({ data: payload }, { status: 200 });
+    return NextResponse.json({ data: sanitizePublicPayload(payload) }, { status: 200 });
   } catch {
     return NextResponse.json(
       { success: false, message: "Unable to load product." },

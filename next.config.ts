@@ -1,13 +1,5 @@
 import type { NextConfig } from "next";
 
-const apiOrigin = (() => {
-  try {
-    return process.env.BACKEND_URL ? new URL(process.env.BACKEND_URL).origin : "";
-  } catch {
-    return "";
-  }
-})();
-
 const studioOrigin = (() => {
   try {
     return process.env.NEXT_PUBLIC_STUDIO_URL ? new URL(process.env.NEXT_PUBLIC_STUDIO_URL).origin : "";
@@ -62,7 +54,7 @@ const nextConfig: NextConfig = {
           "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style",
           "font-src 'self' https://fonts.gstatic.com data:",
           "img-src 'self' data: blob: https: http:",
-          `connect-src 'self' https://accounts.google.com ${apiOrigin} ${studioOrigin}`.trim(),
+          `connect-src 'self' https://accounts.google.com ${studioOrigin}`.trim(),
           "frame-src 'self' https://accounts.google.com https://www.google.com https://google.com",
           "object-src 'none'",
           "base-uri 'self'",
@@ -83,6 +75,15 @@ const nextConfig: NextConfig = {
     }
 
     return [
+      {
+        source: "/collect-data/:path*",
+        headers: [
+          {
+            key: "Permissions-Policy",
+            value: "camera=(self), microphone=(), geolocation=()",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers,

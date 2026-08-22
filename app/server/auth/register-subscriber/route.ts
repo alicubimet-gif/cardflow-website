@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBackendApiUrl } from "@/lib/config";
+import { getBackendApiUrl } from "@/lib/backend-server";
 
 /**
  * POST /server/auth/register-subscriber

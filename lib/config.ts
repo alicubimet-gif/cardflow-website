@@ -18,28 +18,9 @@ export const STUDIO_URL =
 
 export const GOOGLE_MAPS_URL = process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || 'https://maps.google.com/?q=Zamirzac+Solutions,+Calicut,+Kerala,+India';
 
-export function normalizeBackendUrl(value?: string | null): string {
-  return String(value || '').trim().replace(/\/$/, '').replace(/\/api$/, '');
-}
-
-export function getBackendUrl(): string {
-  return normalizeBackendUrl(
-    process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || ''
-  );
-}
-
 export function getServerApiBase(): string {
   if (typeof window !== 'undefined') return API_BASE;
   return APP_URL ? `${APP_URL.replace(/\/$/, '')}${API_BASE}` : API_BASE;
-}
-
-export function getBackendApiUrl(path = ''): string {
-  const backendUrl = getBackendUrl();
-  if (!backendUrl) {
-    throw new Error('BACKEND_URL or NEXT_PUBLIC_BACKEND_URL is required.');
-  }
-  const cleanPath = path.replace(/^\/+/, '');
-  return `${backendUrl}/api/${cleanPath}`;
 }
 
 /** Absolute Studio login URL (website never posts credentials itself). */
