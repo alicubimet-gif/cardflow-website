@@ -45,6 +45,14 @@ export default function Terms() {
         <p>
           The designs, layout variable compilers, and all visual materials developed on this site belong to {brandSettings.company_name} and are protected under copyright laws.
         </p>
+
+        <h2 className="text-lg font-bold text-foreground mt-6">5. User-Uploaded Content and Licensing</h2>
+        <p>
+          If you use {brandSettings.platform_name} Studio to upload fonts, designs, images, logos, or other creative assets, you are solely responsible for ensuring that you have the right to use and distribute that content—including any required licenses, permissions, or third-party approvals.
+        </p>
+        <p>
+          You represent and warrant that your uploads do not infringe any copyright, trademark, design right, font license, or other intellectual property right of any third party. {brandSettings.company_name} and {brandSettings.platform_name} do not review uploaded content for licensing compliance and will not be responsible or liable for any license dispute, claim, penalty, or loss arising from content you or your team uploads, selects, or applies within the platform.
+        </p>
       </div>
     </div>
   );

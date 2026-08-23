@@ -3,18 +3,36 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { STUDIO_URL, GOOGLE_MAPS_URL } from "@/lib/config";
-import { Heart, Mail, CheckCircle, Phone, MapPin, ArrowUp } from "lucide-react";
+import { Heart, Mail, CheckCircle, Phone, MapPin, ArrowUp, AlertCircle, Loader2 } from "lucide-react";
 import { ThemeLogo } from "@/components/theme-logo";
+import { subscribeToNewsletter } from "@/services/newsletterService";
+import { getErrorMessage } from "@/lib/error-handler";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const handleSubscribe = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email.trim() || submitting) return;
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const data = await subscribeToNewsletter(email.trim());
       setSubscribed(true);
       setEmail("");
-      setTimeout(() => setSubscribed(false), 5000);
+      setTimeout(() => setSubscribed(false), 8000);
+      if (data.message) {
+        // success message shown via subscribed UI
+      }
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -58,22 +76,42 @@ export default function Footer() {
                   <span>Thank you! You have successfully subscribed.</span>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    aria-label="Email address for newsletter"
-                    className="flex-1 px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white transition-all"
-                  />
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow-md active:scale-98 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  >
-                    Subscribe
-                  </button>
+                <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      required
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      disabled={submitting}
+                      aria-label="Email address for newsletter"
+                      className="flex-1 px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white transition-all disabled:opacity-60"
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting || !email.trim()}
+                      className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow-md active:scale-98 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center gap-1.5"
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          …
+                        </>
+                      ) : (
+                        "Subscribe"
+                      )}
+                    </button>
+                  </div>
+                  {error ? (
+                    <p className="text-[11px] text-red-600 dark:text-red-400 flex items-center gap-1.5 px-1">
+                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                      {error}
+                    </p>
+                  ) : null}
                 </form>
               )}
             </div>
