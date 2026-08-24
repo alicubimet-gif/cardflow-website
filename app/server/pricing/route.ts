@@ -2,18 +2,17 @@ import { NextResponse } from "next/server";
 import { getBackendApiUrl } from "@/lib/backend-server";
 import { DEFAULT_CREDIT_RATES, parseCreditRates } from "@/lib/creditPricing";
 
-function highestBenefitIndex(packages: Array<{ credits?: number; total_credits?: number; price?: number | string }>) {
+function highestPackageIndex(packages: Array<{ credits?: number; total_credits?: number; price?: number | string }>) {
   let best = -1;
-  let bestScore = -1;
   let bestCredits = -1;
+  let bestPrice = -1;
   packages.forEach((pkg, index) => {
     const credits = Math.max(Number(pkg.credits ?? pkg.total_credits) || 0, 0);
     const price = Math.max(Number(pkg.price) || 0, 0);
-    const score = credits <= 0 ? 0 : price <= 0 ? Number.POSITIVE_INFINITY : credits / price;
-    if (score > bestScore || (score === bestScore && credits > bestCredits)) {
+    if (credits > bestCredits || (credits === bestCredits && price > bestPrice)) {
       best = index;
-      bestScore = score;
       bestCredits = credits;
+      bestPrice = price;
     }
   });
   return best;
@@ -63,7 +62,7 @@ export async function GET() {
         ? payload
         : [];
 
-    const popularIndex = highestBenefitIndex(results);
+    const popularIndex = highestPackageIndex(results);
 
     const data = results.map((pkg, index) => ({
       id: pkg.id,
